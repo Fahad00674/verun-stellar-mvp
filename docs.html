@@ -241,6 +241,10 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
     <a class="nav-item" onclick="show('api');scrollToEl('ep-validators')" href="javascript:void(0)">GET /validators</a>
     <a class="nav-item" onclick="show('api');scrollToEl('ep-evaluate')" href="javascript:void(0)">POST /evaluate</a>
     <a class="nav-item" onclick="show('api');scrollToEl('ep-score')" href="javascript:void(0)">POST /score</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-mint-sbt')" href="javascript:void(0)">POST /mint-sbt</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-revoke-sbt')" href="javascript:void(0)">POST /revoke-sbt</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-sbt-status')" href="javascript:void(0)">GET /sbt-status</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-sbt-list')" href="javascript:void(0)">GET /sbt-list</a>
   </div>
   <div class="nav-group-label">On-Chain</div>
   <a class="nav-item" onclick="show('anchor')" href="javascript:void(0)"><span class="nav-item-icon">⛓️</span> Stellar Anchor</a>
@@ -608,6 +612,19 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   "operation": "transfer"
 }</code></pre>
   </div>
+
+  <h2 id="ep-mint-sbt">POST /api/mint-sbt</h2>
+  <p>Issues a Soulbound Token credential to an agent, after running consensus. If consensus = BLOCK the request returns <code>HTTP 403</code> and no SBT is minted. Full design + verification details on the <a href="javascript:void(0)" onclick="show('sbt')">Soulbound Token</a> page.</p>
+
+  <h2 id="ep-revoke-sbt">POST /api/revoke-sbt</h2>
+  <p>Kill-switch: clears the agent's <code>vtrust_*</code> manageData entry on the protocol account in a single Stellar transaction. Audit trail (the revoke TX) remains in horizon history. Used to satisfy MiFID II Art. 17 + EU AI Act Art. 14.</p>
+
+  <h2 id="ep-sbt-status">GET /api/sbt-status?agentId=…</h2>
+  <p>Returns the current credential for an agent, or <code>credentialed: false</code> if not issued / revoked. Reads directly from the protocol account's on-chain data — no caching, no Verun-side state.</p>
+
+  <h2 id="ep-sbt-list">GET /api/sbt-list</h2>
+  <p>Returns every active SBT issued by this protocol account. Useful for a public registry view — e.g. "all currently credentialed agents."</p>
+
   <div class="next-prev"><button class="next-btn" onclick="show('anchor')"><div><span class="next-btn-lbl">Next</span>Stellar Anchor →</div></button></div>
 </div>
 
@@ -656,33 +673,135 @@ https://stellar.expert/explorer/testnet/tx/KBGSXMRXSM6P75RB6XHYT3RY6JNK7IGY6KIXW
 <!-- SBT -->
 <div id="page-sbt" style="display:none">
   <h1>Soulbound Token (SBT)</h1>
-  <p class="lead">Each verified agent receives a Stellar issued asset with auth_revocable + auth_required as a non-transferable trust token — its digital credential for regulated operations.</p>
-  <div class="hint note">🔮 <strong>Status:</strong> SBT design is finalized. Implementation in progress — <code>POST /api/mint-sbt</code> endpoint coming in the next release.</div>
-  <h2>Design Spec</h2>
+  <p style="margin-bottom:12px">
+    <span class="live-badge"><span class="live-dot"></span>LIVE on Stellar Testnet</span>
+    &nbsp;&nbsp;<span style="font-size:12px;color:var(--text-muted)">mint · revoke · status · list — all four endpoints in production</span>
+  </p>
+  <p class="lead">Verun issues a non-transferable trust credential — the <strong>VTRUST</strong> SBT — to every agent that passes consensus. The credential is stored as a <code>manageData</code> entry on the protocol account, fully on-chain, publicly verifiable, and revocable in a single transaction.</p>
+
+  <div class="hint info">
+    🪪 <strong>Think of it as a digital passport for AI agents.</strong> The protocol issues it, the protocol revokes it, anyone can verify it via Horizon — no auth, no API call to Verun required.
+  </div>
+
+  <h2>Wallet Architecture (Protocol-Custodial)</h2>
+  <p>Verun's Stellar deployment uses a <strong>protocol-custodial</strong> model — a single responsible party is the issuer, agents do not hold private keys. This matches the Algorand MVP and aligns with EU AI Act Art. 14 (human oversight) + MiFID II Art. 17 (kill-switch).</p>
+
   <table class="doc-table">
-    <thead><tr><th>ASA Parameter</th><th>Value</th><th>Why</th></tr></thead>
+    <thead><tr><th>Party</th><th>Wallet?</th><th>Holds</th></tr></thead>
     <tbody>
-      <tr><td class="td-name">defaultFrozen</td><td>true</td><td>Token is non-transferable by default</td></tr>
-      <tr><td class="td-name">freeze</td><td>""</td><td>No one can freeze/unfreeze — immutable</td></tr>
-      <tr><td class="td-name">clawback</td><td>VERUN_ADDR</td><td>Verun can revoke on bad behaviour</td></tr>
-      <tr><td class="td-name">total</td><td>1</td><td>Unique per agent</td></tr>
-      <tr><td class="td-name">decimals</td><td>0</td><td>Non-fungible</td></tr>
-      <tr><td class="td-name">note</td><td>JSON: agentId, score, tier, ts</td><td>Human-readable credential</td></tr>
+      <tr><td class="td-name">Verun (protocol)</td><td><span class="td-badge badge-live">YES — 1 wallet</span></td><td>SBT registry (manageData), audit trail, anchor TXs</td></tr>
+      <tr><td class="td-name">Agent</td><td><span class="td-badge" style="background:#fee2e2;color:#991b1b;border:1px solid #fecaca">NO</span></td><td>Identified by <code>agentId</code> string only — no keys, no funds, no Stellar address</td></tr>
+      <tr><td class="td-name">tokenforge / consumer</td><td>Their own</td><td>Verifies SBT via public Horizon query before granting access</td></tr>
     </tbody>
   </table>
-  <h2>Planned Endpoint</h2>
+
+  <div class="hint note">
+    🔐 <strong>Why no agent wallet?</strong> Three reasons: (1) AI agents don't have a mature key-management story yet — losing a key = losing the credential. (2) EU regulators want a single responsible party they can sanction or audit, not 1000 self-sovereign agents. (3) The kill-switch needs to be unilateral — the issuer must be able to revoke without the agent's cooperation.
+  </div>
+
+  <h2>How the credential lives on-chain</h2>
+  <p>The SBT is <strong>not a Stellar asset</strong> in the traditional sense — it's a <code>manageData</code> entry on the protocol account. That means there is no asset balance, no trustline, no agent-side signature required. The "token" is a key-value pair stored permanently on the issuer's account.</p>
+
+  <table class="doc-table">
+    <thead><tr><th>Field</th><th>Format</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">key</td><td><code>vtrust_&lt;agentId&gt;</code> (max 64 bytes)</td><td><code>vtrust_agt_fahad_001</code></td></tr>
+      <tr><td class="td-name">value</td><td><code>&lt;tier&gt;:&lt;score&gt;:&lt;isoTs&gt;</code> (max 64 bytes)</td><td><code>MED:720:2026-04-30T14:40:53Z</code></td></tr>
+      <tr><td class="td-name">issuer</td><td>Stellar address (G…)</td><td><code>GD2CGW…BYFTHW</code> (protocol)</td></tr>
+      <tr><td class="td-name">tamper-proof</td><td>sha256(credential) in tx memo</td><td>32-byte hash committed alongside the manageData op</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Mint flow</h2>
   <div class="code-block">
-    <div class="code-header"><span>POST /api/mint-sbt (coming soon)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <div class="code-header"><span>POST /api/mint-sbt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
     <pre><code class="language-json">// Request
-{ "agentId": "agt_demo", "score": 820 }
+{ "agentId": "agt_fahad_001", "score": 720, "operation": "transfer" }
 
 // Response
 {
-  "assetId": 123456789,
-  "txid": "STELLAR_TX_HASH...",
-  "explorer": "https://stellar.expert/explorer/testnet/asset/123456789"
+  "success": true,
+  "verdict_consensus": "MED",
+  "agentId": "agt_fahad_001",
+  "tier": "MED",
+  "score": 720,
+  "ts": "2026-04-30T14:40:53.913Z",
+  "key": "vtrust_agt_fahad_001",
+  "txid": "a6013d9d21ba6ab476b66410b87a8a5e3694866064d0af5e7131436df7871f5c",
+  "ledger": "2310151",
+  "credential_hash": "4f3aaa283c7cf13ff7427fd9560b49314baaf40bf790efb78cc4e3e00a45ea6d",
+  "issuer": "GD2CGWE3LVWN6DQCNVMFWPGNP42FXQ66MLRXFUHSTCR3OUVHFJBYFTHW",
+  "explorer": "https://stellar.expert/explorer/testnet/tx/a6013d9d...",
+  "verify_url": "https://horizon-testnet.stellar.org/accounts/GD2CGW.../data/vtrust_agt_fahad_001"
 }</code></pre>
   </div>
+  <p>The endpoint runs validator consensus first. <strong>If consensus = BLOCK, no SBT is issued</strong> — the operation gate is enforced before mint. One transaction includes both the <code>manageData</code> op and the anchor self-payment.</p>
+
+  <h2>Revoke flow (kill-switch)</h2>
+  <div class="code-block">
+    <div class="code-header"><span>POST /api/revoke-sbt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-json">// Request
+{ "agentId": "agt_fahad_001", "reason": "policy_violation" }
+
+// Response
+{
+  "success": true,
+  "revoked": true,
+  "agentId": "agt_fahad_001",
+  "key": "vtrust_agt_fahad_001",
+  "reason": "policy_violation",
+  "txid": "...",
+  "ledger": "...",
+  "revoke_hash": "...",
+  "explorer": "https://stellar.expert/explorer/testnet/tx/..."
+}</code></pre>
+  </div>
+  <p>Revocation = <code>manageData</code> with <code>value = null</code>. The entry is removed from the issuer's account state in a single transaction (~5 seconds). The revoke transaction itself remains in horizon history forever — the audit trail is not erased.</p>
+
+  <h2>Public verification (zero-auth)</h2>
+  <p>Anyone — tokenforge, an auditor, a regulator — can verify the credential directly against Stellar Horizon. No Verun API call required.</p>
+  <div class="code-block">
+    <div class="code-header"><span>GET horizon/accounts/{issuer}/data/{key}</span></div>
+    <pre><code class="language-bash">curl https://horizon-testnet.stellar.org/accounts/GD2CGWE3.../data/vtrust_agt_fahad_001
+
+# Active credential:
+{ "value": "TUVEOjcyMDoyMDI2LTA0LTMwVDE0OjQwOjUzLjkxM1o=" }
+# (base64 decode → "MED:720:2026-04-30T14:40:53.913Z")
+
+# Revoked credential:
+HTTP 404 Not Found</code></pre>
+  </div>
+
+  <h2>Endpoint summary</h2>
+  <table class="doc-table">
+    <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><span class="td-badge badge-post">POST</span></td><td class="td-name">/api/mint-sbt</td><td>Issue credential after consensus check</td></tr>
+      <tr><td><span class="td-badge badge-post">POST</span></td><td class="td-name">/api/revoke-sbt</td><td>Kill-switch: clear credential entry</td></tr>
+      <tr><td><span class="td-badge badge-get">GET</span></td><td class="td-name">/api/sbt-status?agentId=…</td><td>Check credential for one agent</td></tr>
+      <tr><td><span class="td-badge badge-get">GET</span></td><td class="td-name">/api/sbt-list</td><td>List all credentialed agents</td></tr>
+    </tbody>
+  </table>
+
+  <h2>End-to-end demo (one command)</h2>
+  <div class="code-block">
+    <div class="code-header"><span>scripts/sbt-demo.sh</span></div>
+    <pre><code class="language-bash">git clone https://github.com/Fahad00674/verun-stellar-mvp
+cd verun-stellar-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
+./scripts/sbt-demo.sh agt_fahad_001 720</code></pre>
+  </div>
+  <p>Runs the full lifecycle: status check → mint → public verification → revoke (kill-switch) → re-verification. Two real testnet transactions, ~25 seconds total.</p>
+
+  <h2>Compliance mapping</h2>
+  <table class="doc-table">
+    <thead><tr><th>Regulation</th><th>Article</th><th>Verun mechanism</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">MiCA</td><td>Art. 68</td><td>2-of-3 validator consensus + on-chain audit trail</td></tr>
+      <tr><td class="td-name">EU AI Act</td><td>Art. 14</td><td>Validators are human/institutional — every action gated by their consensus</td></tr>
+      <tr><td class="td-name">MiFID II</td><td>Art. 17</td><td>Single-TX kill-switch via revoke endpoint (~5s)</td></tr>
+    </tbody>
+  </table>
+
   <div class="next-prev"><button class="next-btn" onclick="show('roadmap')"><div><span class="next-btn-lbl">Next</span>Mainnet Roadmap →</div></button></div>
 </div>
 
@@ -698,14 +817,16 @@ https://stellar.expert/explorer/testnet/tx/KBGSXMRXSM6P75RB6XHYT3RY6JNK7IGY6KIXW
       </div>
       <div class="tl-body">
         <div class="tl-period active">April 2026 — LIVE</div>
-        <div class="tl-title">Stellar Testnet MVP</div>
-        <div class="tl-desc">4 API endpoints live. BCP Partners + tokenforge validators. 2-of-N consensus. On-chain anchor via Memo Transactions. Non-blocking design.</div>
+        <div class="tl-title">Stellar Testnet MVP + Soulbound Tokens</div>
+        <div class="tl-desc">10 API endpoints live. BCP Partners + tokenforge + Test validators. 2-of-3 consensus. On-chain anchor via Memo Transactions. <strong>SBT mint + revoke + status + list all working</strong> via protocol-custodial manageData design. Friendbot auto-funding. Non-blocking design.</div>
         <div class="tl-chips">
           <span class="chip">/evaluate</span>
-          <span class="chip">/validators</span>
-          <span class="chip">/score</span>
-          <span class="chip">/health</span>
+          <span class="chip">/mint-sbt</span>
+          <span class="chip">/revoke-sbt</span>
+          <span class="chip">/sbt-status</span>
+          <span class="chip">/sbt-list</span>
           <span class="chip">Stellar anchor</span>
+          <span class="chip">kill-switch</span>
         </div>
       </div>
     </div>
@@ -716,12 +837,12 @@ https://stellar.expert/explorer/testnet/tx/KBGSXMRXSM6P75RB6XHYT3RY6JNK7IGY6KIXW
       </div>
       <div class="tl-body">
         <div class="tl-period">Q2 2026</div>
-        <div class="tl-title">SBT + tokenforge Production Integration</div>
-        <div class="tl-desc">Soulbound Token minting via /api/mint-sbt. tokenforge Chain API production access. Rate limiting + Bearer token auth on all endpoints.</div>
+        <div class="tl-title">tokenforge Production Integration</div>
+        <div class="tl-desc">tokenforge Chain API production access (real api.tokensuite.io calls instead of testnet logic gate). Rate limiting + Bearer token auth on all endpoints. SBT-gated platform access live.</div>
         <div class="tl-chips">
-          <span class="chip">SBT mint</span>
           <span class="chip">tokenforge prod</span>
           <span class="chip">API auth</span>
+          <span class="chip">SBT-gated access</span>
         </div>
       </div>
     </div>
