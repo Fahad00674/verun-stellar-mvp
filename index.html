@@ -593,9 +593,8 @@ Docs: https://verun-stellar-mvp.vercel.app/docs.html</pre>
       <div class="footer-links">
         <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
         <a href="#platforms">Platforms</a>
-        <a href="https://github.com/rafaschul/verun-stellar-mvp" target="_blank">GitHub</a>
+        <a href="https://github.com/Fahad00674/verun-stellar-mvp" target="_blank">GitHub</a>
         <a href="/docs.html" target="_blank">Tech Docs</a>
-        <a href="https://bcpp.io/impressum" target="_blank">Impressum</a>
         <a href="https://www.bcpp.io/contact-us" target="_blank">Contact</a>
       </div>
       <div class="footer-note">Stellar Testnet · v0.1.0</div>
@@ -638,10 +637,36 @@ const MODES = {
   }
 };
 
+// ─── ANCHOR TX BOX ──────────────────────────────────────
+// Renders a clickable on-chain anchor box. If no live evaluation has come back
+// yet, shows a loading state instead of a fake hash + misleading "unavailable".
+function anchorBoxHTML(label) {
+  const tx = lastLiveEvaluation?.anchor?.txid;
+  const explorer = lastLiveEvaluation?.anchor?.explorer
+    || (tx ? `https://stellar.expert/explorer/testnet/tx/${tx}` : null);
+  if (tx && explorer) {
+    return `<div class="tx-box">
+      <div class="tx-label">${label}</div>
+      <div class="tx-hash"><a href="${explorer}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dashed currentColor">${tx}</a></div>
+      <div class="tx-link"><a href="${explorer}" target="_blank" rel="noopener">↗ View on Stellar Expert Testnet</a></div>
+    </div>`;
+  }
+  return `<div class="tx-box" style="opacity:0.85">
+    <div class="tx-label">${label}</div>
+    <div class="tx-hash" style="display:flex;align-items:center;gap:8px">
+      <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--teal-border);border-top-color:var(--teal);border-radius:50%;animation:spin 0.8s linear infinite"></span>
+      <span>Anchoring on Stellar testnet…</span>
+    </div>
+    <div class="tx-link">Live <code>/api/evaluate</code> call in flight</div>
+  </div>`;
+}
+
 // ─── LOG ────────────────────────────────────────────────
 function now() { return new Date().toTimeString().substr(0,8); }
 function addLog(type, typeLabel, msg, cls='') {
+  // Terminal panel was removed from layout — log to console instead so the JS doesn't throw.
   const body = document.getElementById('terminal-body');
+  if (!body) { try { console.debug(`[${typeLabel}]`, msg); } catch (_) {} return; }
   const line = document.createElement('div');
   line.className = `log-line log-${type}`;
   line.innerHTML = `<span class="log-time">${now()}</span><span class="log-type">${typeLabel}</span><span class="log-msg ${cls}">${msg}</span>`;
@@ -699,17 +724,22 @@ function prevStep(){ if(currentStep>1){currentStep--;renderStep();} }
 function nextStep(){ const m=MODES[currentMode]; if(currentStep<m.steps){currentStep++;renderStep();} }
 
 // ─── MODE SWITCH ────────────────────────────────────────
+let liveDemoPromise = null;
 function setMode(mode) {
   currentMode = mode;
   currentStep = 1;
   ['discover','supervised','auto'].forEach(k=>{
-    document.getElementById('tab-'+k).classList.remove('active');
+    const t = document.getElementById('tab-'+k);
+    if (t) t.classList.remove('active');
   });
-  document.getElementById('tab-'+mode).classList.add('active');
-  document.getElementById('terminal-title').textContent = MODES[mode].title;
-  document.getElementById('terminal-body').innerHTML = '';
+  const activeTab = document.getElementById('tab-'+mode);
+  if (activeTab) activeTab.classList.add('active');
+  const tt = document.getElementById('terminal-title'); if (tt) tt.textContent = MODES[mode].title;
+  const tb = document.getElementById('terminal-body'); if (tb) tb.innerHTML = '';
   renderStep();
   addLog('agent','AGENT',`Mode: ${mode.toUpperCase()}`, mode==='auto'?'purple':'teal');
+  // Kick off (or reuse) a live /api/evaluate call so step 3 can render the real testnet TXID.
+  if (!liveDemoPromise) liveDemoPromise = runLiveDemo().catch(()=>{}).finally(()=>{ liveDemoPromise = null; });
 }
 
 function copyAgentPrompt() {
@@ -736,10 +766,6 @@ function scrollToDemo() {
 }
 
 async function runLiveDemo() {
-  window.location.hash = '#demo';
-  const panel = null; // live-demo-result removed
-
-  document.getElementById('terminal-body').innerHTML = '';
   addLog('agent','AGENT','Running live evaluate call...','teal');
   addLog('verun','VERUN',`payload: ${JSON.stringify(LIVE_DEMO_PAYLOAD)}`,'dim');
 
@@ -763,8 +789,7 @@ async function runLiveDemo() {
       addLog('warn','WARN',`anchor: ${anchor.status || 'unavailable'} ${anchor.error ? `(${anchor.error})` : ''}`,'amber');
     }
 
-    setMode('supervised');
-    currentStep = 3;
+    // Re-render whatever step the user is currently on so the TX hash + explorer link populate live.
     renderStep();
   } catch (e) {
     addLog('warn','WARN',`live call failed: ${e.message}`,'amber');
@@ -847,8 +872,6 @@ function renderDiscover(body) {
     ]);
   }
   if(step===3) {
-    const txid = lastLiveEvaluation?.anchor?.txid || ('STX'+Math.random().toString(36).substr(2,36).toUpperCase());
-    const explorer = lastLiveEvaluation?.anchor?.explorer || null;
     const consensus = lastLiveEvaluation?.verdict?.consensus || 'LOW';
     const permitted = (lastLiveEvaluation?.verdict?.permitted ?? true);
     body.innerHTML = `<div class="anim-in">
@@ -868,19 +891,16 @@ function renderDiscover(body) {
 <span class="k">"score"</span>:    <span class="v">${lastLiveEvaluation?.verdict?.score ?? 920}</span>,
 <span class="k">"consensus"</span>:<span class="v">"${consensus}"</span>,
 <span class="k">"status"</span>:   <span class="s">"awaiting_approval"</span></div>
-      <div class="tx-box">
-        <div class="tx-label">Stellar Anchor · Referral TX</div>
-        <div class="tx-hash">${txid}</div>
-        <div class="tx-link">${explorer ? `<a href="${explorer}" target="_blank">↗ Stellar Expert Testnet</a>` : 'Anchor unavailable (fund wallet for live txid)'}</div>
-      </div>
+      ${anchorBoxHTML('Stellar Anchor · Referral TX')}
       <div class="progress-wrap"><div class="progress-fill teal" id="prog3"></div></div>
     </div>`;
     setTimeout(()=>{const p=document.getElementById('prog3');if(p)p.style.width='100%';},100);
+    const liveTxid = lastLiveEvaluation?.anchor?.txid;
     queueLogs([
       ['agent','AGENT','preparing referral for human_rafael...','teal'],
       ['agent','AGENT',`live verdict: ${consensus} · permitted ${String(permitted)}`,'dim'],
       ['tx','TX','anchoring referral on Stellar...','teal'],
-      ['tx','TX',`txID: ${txid}`,'dim'],
+      ['tx','TX', liveTxid ? `txID: ${liveTxid}` : 'fetching live txid...', 'dim'],
       ['ok','OK','referral anchored · awaiting human approval','green'],
     ]);
   }
@@ -935,7 +955,6 @@ function renderSupervised(body) {
     ]);
   }
   if(step===3) {
-    const txid = 'STX'+Math.random().toString(36).substr(2,36).toUpperCase();
     body.innerHTML = `<div class="anim-in">
       <div class="step-header">
         <div class="step-num">Step 3 · Decision Anchored</div>
@@ -946,11 +965,7 @@ function renderSupervised(body) {
         <div class="verdict-title green">Transaction Executed · Approved</div>
         <div class="verdict-sub green">€5,000 EURC → tokenforge · anchored on-chain</div>
       </div>
-      <div class="tx-box">
-        <div class="tx-label">Stellar Anchor · Approval TX</div>
-        <div class="tx-hash">${txid.substr(0,28)}...</div>
-        <div class="tx-link">↗ Stellar Expert Testnet</div>
-      </div>
+      ${anchorBoxHTML('Stellar Anchor · Approval TX')}
       <div class="progress-wrap"><div class="progress-fill teal" id="prog-s3"></div></div>
     </div>`;
     setTimeout(()=>{const p=document.getElementById('prog-s3');if(p)p.style.width='100%';},100);
@@ -1039,7 +1054,6 @@ function renderAuto(body) {
     ]);
   }
   if(step===3) {
-    const txid = 'STX'+Math.random().toString(36).substr(2,36).toUpperCase();
     body.innerHTML = `<div class="anim-in">
       <div class="step-header">
         <div class="step-num" style="color:var(--purple)">Step 3 · On-Chain Proof</div>
@@ -1050,11 +1064,7 @@ function renderAuto(body) {
         <div class="verdict-title purple">Autonomous TX Complete</div>
         <div class="verdict-sub purple">Anchored on Stellar · human notified</div>
       </div>
-      <div class="tx-box">
-        <div class="tx-label">Stellar Anchor · Auto Execution TX</div>
-        <div class="tx-hash">${txid.substr(0,28)}...</div>
-        <div class="tx-link">↗ Stellar Expert Testnet</div>
-      </div>
+      ${anchorBoxHTML('Stellar Anchor · Auto Execution TX')}
       <div class="info-card" style="margin-top:10px">
         <div class="ic-row"><span class="ic-label">Human notified</span><span class="ic-val green">Yes · push notification</span></div>
         <div class="ic-row"><span class="ic-label">Revoke anytime</span><span class="ic-val amber">Yes · single action</span></div>
@@ -1063,10 +1073,11 @@ function renderAuto(body) {
       <div class="progress-wrap"><div class="progress-fill purple" id="prog-a3"></div></div>
     </div>`;
     setTimeout(()=>{const p=document.getElementById('prog-a3');if(p)p.style.width='100%';},100);
+    const liveTxA = lastLiveEvaluation?.anchor?.txid;
     queueLogs([
       ['tx','TX','anchoring execution on Stellar...','teal'],
-      ['tx','TX',`txID: ${txid.substr(0,20)}...`,'dim'],
-      ['ok','OK','anchored · ~3.6s · audit trail complete','green'],
+      ['tx','TX', liveTxA ? `txID: ${liveTxA}` : 'fetching live txid...','dim'],
+      ['ok','OK','anchored · ~5s · audit trail complete','green'],
       ['auto','AUTO','human notified · next execution scheduled','purple'],
     ]);
   }
@@ -1077,6 +1088,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderStep();
   addLog('verun','VERUN','Verun Network online · Stellar Testnet','teal');
   addLog('verun','VERUN','Select a mode to begin demo','dim');
+  // Fire the live evaluate call in the background so step 3 has a real testnet TXID by the time the user clicks.
+  if (!liveDemoPromise) liveDemoPromise = runLiveDemo().catch(()=>{}).finally(()=>{ liveDemoPromise = null; });
 });
 </script>
 </body>
