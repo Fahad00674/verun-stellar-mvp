@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
 <title>Verun — Competitive Landscape (May 2026)</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -185,9 +187,105 @@
     text-align: center;
   }
 
-  @media (max-width: 768px) {
-    .verun-models { grid-template-columns: 1fr; }
-    h1 { font-size: 28px; }
+  .private-banner {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  /* ===== MOBILE / RESPONSIVE ===== */
+  @media (max-width: 880px) {
+    body { padding: 20px 14px; }
+    h1 { font-size: 26px; line-height: 1.2; }
+    .subtitle { font-size: 14px; }
+    .meta { font-size: 12px; }
+    header { margin-bottom: 24px; padding-bottom: 18px; }
+
+    .tldr { padding: 20px 18px; margin-bottom: 26px; }
+    .tldr h2 { font-size: 11px; letter-spacing: 1.4px; }
+    .tldr p { font-size: 14px; line-height: 1.6; }
+
+    h2.section { font-size: 18px; margin: 30px 0 14px; }
+
+    .verun-models { grid-template-columns: 1fr; gap: 14px; }
+    .model-card { padding: 18px; }
+
+    /* Convert table to stacked cards on mobile */
+    .table-wrap {
+      border: none;
+      background: transparent;
+      overflow: visible;
+      border-radius: 0;
+    }
+    table { min-width: 0; display: block; }
+    thead { display: none; }
+    tbody { display: block; }
+    tr {
+      display: block;
+      background: white;
+      border: 1px solid #d8d8d2;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    tr.us {
+      background: #fff8e6;
+      border: 2px solid #ffb84d;
+    }
+    td {
+      display: block;
+      padding: 10px 0;
+      border: none;
+      border-bottom: 1px dashed #ececea;
+      font-size: 13.5px;
+    }
+    td:last-child { border-bottom: none; padding-bottom: 0; }
+    td:first-child { padding-top: 0; }
+    td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #888;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    td:first-child::before, td.match-cell::before { display: none; }
+    .name { font-size: 16px; }
+
+    /* Match cell stays prominent on mobile */
+    .match-cell {
+      text-align: left;
+      padding: 14px;
+      background: #fafaf7;
+      border-radius: 8px;
+      margin-top: 10px;
+      border-bottom: none !important;
+    }
+    .match-pct { font-size: 26px; display: inline-block; margin-right: 10px; vertical-align: middle; }
+    .match-bar { display: inline-block; width: calc(100% - 80px); vertical-align: middle; margin-bottom: 0; height: 8px; }
+    .match-what { margin-top: 8px; font-size: 12.5px; }
+
+    .verdict { padding: 18px; }
+    .verdict h3 { font-size: 16px; }
+    .verdict p { font-size: 13.5px; }
+
+    .chain-note { font-size: 11px; }
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 22px; }
+    .tldr p { font-size: 13.5px; }
+    .name { font-size: 15px; }
   }
 </style>
 </head>
@@ -195,6 +293,7 @@
 <div class="wrap">
 
   <header>
+    <div class="private-banner">🔒 Internal · Unlisted · Do not share publicly</div>
     <div class="eyebrow">Competitive Landscape Brief</div>
     <h1>Verun vs. The AI-Agent Trust Layer</h1>
     <div class="subtitle">A high-level comparison of who else is building "trust + identity for AI agents on-chain" — and how each one makes money.</div>
@@ -453,5 +552,20 @@
   </footer>
 
 </div>
+<script>
+  // Auto-add data-label attributes to table cells for mobile card view
+  (function() {
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th')).map(function(th) {
+        return th.textContent.trim();
+      });
+      table.querySelectorAll('tbody tr').forEach(function(row) {
+        Array.from(row.children).forEach(function(td, i) {
+          if (headers[i]) td.setAttribute('data-label', headers[i]);
+        });
+      });
+    });
+  })();
+</script>
 </body>
 </html>
