@@ -104,6 +104,6 @@ echo
 echo "│ Mint TX    : $TXID"
 echo "│ Revoke TX  : $REV_TXID"
 echo "│ Issuer     : protocol account (single responsible party — EU regulator-friendly)"
-echo "│ Compliance : MiCA Art.68 ✓  AI Act Art.14 ✓  MiFID II Art.17 ✓"
+echo "│ Compliance : EU AI Act Art.12 ✓  AI Act Art.14 ✓  MiFID II Art.17 ✓"
 bold "└────────────────────────────────────────────────────────────────┘"
 echo
