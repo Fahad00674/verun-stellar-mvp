@@ -236,7 +236,7 @@ a{color:var(--teal);text-decoration:none}
 .nav-btn.primary:hover:not(:disabled){background:#00f0c4}
 .nav-btn.primary-purple{background:var(--purple);border-color:var(--purple);color:#fff}
 .nav-btn.primary-purple:hover:not(:disabled){background:#9a85ff}
-.nav-btn.restart{background:var(--green);border-color:var(--green);color:#fff}
+.nav-btn.restart{background:var(--green);border-color:var(--green);color:#fff!important;font-weight:700}
 .step-counter{font-size:11px;color:var(--text3);font-weight:500}
 
 /* TERMINAL */
@@ -737,7 +737,7 @@ function renderDots() {
   document.getElementById('btn-prev').disabled = currentStep === 1;
   const nextBtn = document.getElementById('btn-next');
   if(currentStep === m.steps){
-    nextBtn.textContent = 'Restart ↺';
+    nextBtn.textContent = '↻ Restart';
     nextBtn.className = 'nav-btn restart';
     nextBtn.onclick = () => { currentStep=1; renderStep(); };
   } else {
