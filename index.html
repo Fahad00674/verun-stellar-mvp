@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verun Network — The Trust Layer for Agentic Finance</title>
+<title>Verun Network — The Trust ID for Agentic Finance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -271,17 +271,7 @@ a{color:var(--teal);text-decoration:none}
 .plat-tags{display:flex;flex-wrap:wrap;gap:6px}
 .plat-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--bg2);color:var(--text3);border:1px solid var(--border)}
 
-/* MICA */
-.mica-section{background:var(--bg)}
-.mica-table-wrap{margin-top:40px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.mica-table{width:100%;border-collapse:collapse;font-size:13px}
-.mica-table th{text-align:left;padding:12px 16px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);border-bottom:1px solid var(--border);background:var(--bg2)}
-.mica-table td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text2)}
-.mica-table tr:last-child td{border-bottom:none}
-.mica-table tr:hover td{background:rgba(0,212,170,0.02)}
-.mica-table td:first-child{font-family:var(--mono);font-size:11px;color:var(--teal);font-weight:600;white-space:nowrap}
-.mica-table td:nth-child(2){color:var(--text);font-weight:500}
-.mica-table .tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border)}
+/* Compliance section (legacy class names, unused but kept for backward CSS compatibility) */
 
 /* ARCHITECTURE */
 .arch-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -317,11 +307,58 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 0}
   .hero{padding:70px 0 56px}
   .section{padding:64px 0}
   .mode-arrow{display:none}
+  .modes-grid{grid-template-columns:1fr}
+  .mode-card{border-right:none;border-bottom:1px solid var(--border)}
+  .mode-card:last-child{border-bottom:none}
+}
+@media(max-width:760px){
+  .container{padding:0 16px}
+  .nav{padding:0 16px;height:56px}
+  .nav-logo{font-size:15px}
+  .nav-logo .tag{font-size:8px;padding:2px 6px}
+  .stellar-badge{font-size:10px;padding:3px 9px}
+  .hero{padding:48px 0 0}
+  .hero-inner{padding-bottom:0}
+  .hero-copy{padding-bottom:24px}
+  .hero h1{font-size:30px;line-height:1.15}
+  .hero-sub{font-size:15px;line-height:1.6;margin-bottom:28px}
+  .hero-btns{justify-content:flex-start}
+  .btn{font-size:13px;padding:11px 22px}
+  .phone-wrap{padding:24px 0 0;margin-right:0;justify-content:center}
+  .phone{width:200px}
+  .section{padding:48px 0}
+  .section-title{font-size:26px}
+  .section-sub{font-size:14px}
+  .demo-stage{padding:18px 14px}
+  .step-title{font-size:15px;line-height:1.3}
+  .step-num{font-size:9px}
+  /* Stack info-card rows vertically on mobile to avoid overflow with mono fonts */
+  .info-card{padding:12px}
+  .ic-row{flex-direction:column;align-items:flex-start;gap:3px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+  .ic-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+  .ic-val{text-align:left;font-size:12px;word-break:break-all}
+  .ic-label{font-size:9px}
+  .check-list li{font-size:12px;line-height:1.4}
+  .code-block{font-size:10px;padding:10px 12px;white-space:pre-wrap;word-break:break-all}
+  .verdict-box{padding:16px}
+  .verdict-title{font-size:15px}
+  .verdict-sub{font-size:12px}
+  .ha-msg{font-size:13px;line-height:1.6}
+  .ha-btns{flex-direction:column;gap:8px}
+  .ha-btn{width:100%}
+  .step-progress{flex-wrap:wrap;gap:8px}
+  .step-controls{flex-wrap:wrap;gap:8px}
+  .step-controls button{flex:1;min-width:0;font-size:12px;padding:9px 14px}
 }
 @media(max-width:640px){
   .nav-links{display:none}
-  .hero h1{font-size:32px}
+  .hero h1{font-size:28px}
   .mode-tabs{flex-direction:column;width:100%}
+  .mode-tabs button{width:100%}
+  .arch-node{flex:1 1 50%;min-width:0}
+  .terminal-panel{font-size:11px}
+  .footer{font-size:12px}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
 }
 </style>
 </head>
@@ -348,7 +385,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 0}
   <div class="container">
     <div class="hero-inner">
       <div class="hero-copy">
-        <h1>The Trust Layer<br>for Agentic Finance.</h1>
+        <h1>The Trust ID<br>for Agentic Finance.</h1>
         <p class="hero-sub">Make your AI agent <strong>regulatory-ready</strong>.</p>
         <div class="hero-btns">
           <button class="btn btn-teal" onclick="scrollToDemo()">Run Demo →</button>
@@ -815,14 +852,14 @@ function renderDiscover(body) {
         <div class="step-title">Agent scans platform registry</div>
       </div>
       <div class="info-card">
-        <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val teal">agt_aurora_3f9a</span></div>
+        <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val teal">agt_openclaw_01</span></div>
         <div class="ic-row"><span class="ic-label">Intent</span><span class="ic-val">Security Token Investment</span></div>
         <div class="ic-row"><span class="ic-label">Budget</span><span class="ic-val">€ 5,000 EURC</span></div>
-        <div class="ic-row"><span class="ic-label">Region</span><span class="ic-val">EU · MiCA Jurisdiction</span></div>
+        <div class="ic-row"><span class="ic-label">Region</span><span class="ic-val">EU · MiFID II Jurisdiction</span></div>
       </div>
       <ul class="check-list" id="cl1">
         <li id="c1-1">Scanning investment platforms...</li>
-        <li id="c1-2">Filtering: potential MiCA features · pre-audit</li>
+        <li id="c1-2">Filtering: MiFID II + AI Act audit trail</li>
         <li id="c1-3">Match found: tokenforge (Score 920)</li>
       </ul>
     </div>`;
@@ -833,10 +870,10 @@ function renderDiscover(body) {
       },t);
     });
     queueLogs([
-      ['agent','AGENT','agt_aurora_3f9a initialised','teal'],
+      ['agent','AGENT','agt_openclaw_01 initialised','teal'],
       ['agent','AGENT','intent: Security Token Investment · €5,000','dim'],
       ['verun','VERUN','scanning platform registry...','purple'],
-      ['verun','VERUN','filter: potential MiCA feature · EU jurisdiction','dim'],
+      ['verun','VERUN','filter: MiFID II + AI Act trail · EU jurisdiction','dim'],
       ['ok','MATCH','tokenforge → score: 920 · VERIFIED','green'],
     ]);
   }
@@ -860,7 +897,7 @@ function renderDiscover(body) {
 <span class="k">"score"</span>:     <span class="v">920</span>,
 <span class="k">"tier"</span>:      <span class="v">"VERIFIED"</span>,
 <span class="k">"validator_consensus"</span>: <span class="v">3</span>/<span class="v">3</span>,
-<span class="k">"mica"</span>:      <span class="s">"Art.68 · Art.72 · Art.75"</span></div>
+<span class="k">"compliance"</span>: <span class="s">"MiFID II Art.17 · AI Act Art.14"</span></div>
     </div>`;
     setTimeout(()=>{ const b=document.getElementById('bar1'); if(b) b.style.width='92%'; },200);
     queueLogs([
@@ -868,7 +905,7 @@ function renderDiscover(body) {
       ['verun','VERUN','Val-EU-01 → VERIFIED (eWpG confirmed)','dim'],
       ['verun','VERUN','Val-Neutral-02 → VERIFIED (AML clear)','dim'],
       ['verun','VERUN','Val-tokenforge → VERIFIED (self-attested)','dim'],
-      ['ok','OK','consensus 3/3 · score: 920 · potential MiCA feature','green'],
+      ['ok','OK','consensus 3/3 · score: 920 · MiFID II + AI Act trail','green'],
     ]);
   }
   if(step===3) {
@@ -885,7 +922,7 @@ function renderDiscover(body) {
         <div class="verdict-sub green">consensus ${consensus} · permitted ${String(permitted)}</div>
       </div>
       <div class="code-block"><span class="k">"to"</span>:       <span class="s">"human_rafael"</span>,
-<span class="k">"from"</span>:     <span class="s">"agt_aurora_3f9a"</span>,
+<span class="k">"from"</span>:     <span class="s">"agt_openclaw_01"</span>,
 <span class="k">"platform"</span>: <span class="s">"tokenforge"</span>,
 <span class="k">"action"</span>:   <span class="s">"invest €5,000 EURC"</span>,
 <span class="k">"score"</span>:    <span class="v">${lastLiveEvaluation?.verdict?.score ?? 920}</span>,
@@ -916,7 +953,7 @@ function renderSupervised(body) {
       </div>
       <div class="human-action">
         <div class="ha-label">👤 Human Dashboard · Notification</div>
-        <div class="ha-msg">Your agent <strong>agt_aurora_3f9a</strong> recommends investing <strong>€5,000 EURC</strong> via <strong>tokenforge</strong>.<br><br>Platform Trust Score: <strong style="color:var(--teal)">920/1000</strong> · potential MiCA feature · eWpG verified.</div>
+        <div class="ha-msg">Your agent <strong>agt_openclaw_01</strong> recommends investing <strong>€5,000 EURC</strong> via <strong>tokenforge</strong>.<br><br>Platform Trust Score: <strong style="color:var(--teal)">920/1000</strong> · MiFID II + AI Act audit trail · eWpG verified.</div>
       </div>
       <div class="info-card">
         <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge · tokenforge.io</span></div>
@@ -926,7 +963,7 @@ function renderSupervised(body) {
       </div>
     </div>`;
     queueLogs([
-      ['human','HUMAN','referral received from agt_aurora_3f9a','amber'],
+      ['human','HUMAN','referral received from agt_openclaw_01','amber'],
       ['human','HUMAN','platform: tokenforge · action: invest €5k','dim'],
       ['verun','VERUN','verun verdict attached: VERIFIED (920)','purple'],
       ['human','HUMAN','awaiting human decision...','amber'],
@@ -973,7 +1010,7 @@ function renderSupervised(body) {
       ['human','HUMAN','approved: invest €5,000 EURC on tokenforge','amber'],
       ['tx','TX','anchoring approval on Stellar...','teal'],
       ['ok','OK','approval anchored · ~3.6s','green'],
-      ['ok','OK','transaction executed · potential MiCA feature audit trail written','green'],
+      ['ok','OK','transaction executed · MiFID II + AI Act audit trail written','green'],
     ]);
   }
 }
@@ -1012,7 +1049,7 @@ function renderAuto(body) {
         <div class="verdict-sub purple">Human pre-approved · policy enforced by Verun</div>
       </div>
       <div class="info-card">
-        <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val purple">agt_aurora_3f9a</span></div>
+        <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val purple">agt_openclaw_01</span></div>
         <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge</span></div>
         <div class="ic-row"><span class="ic-label">Max per TX</span><span class="ic-val">€ 10,000 EURC</span></div>
         <div class="ic-row"><span class="ic-label">Revokable</span><span class="ic-val green">Yes · anytime</span></div>
@@ -1022,7 +1059,7 @@ function renderAuto(body) {
       ['auto','AUTO','autonomous mode loaded','purple'],
       ['auto','AUTO','policy: tokenforge · max €10,000/tx · EURC','dim'],
       ['verun','VERUN','policy anchor confirmed on Stellar','purple'],
-      ['auto','AUTO','agent agt_aurora_3f9a ready to execute','teal'],
+      ['auto','AUTO','agent agt_openclaw_01 ready to execute','teal'],
     ]);
   }
   if(step===2) {

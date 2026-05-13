@@ -3,7 +3,7 @@
     "id": "val-bcp-01",
     "name": "BCP Partners",
     "type": "internal",
-    "description": "BCP Partners GmbH — Founding Validator. MiCA Art. 68 compliance node. Enforces Verun score tiers and operation gates.",
+    "description": "BCP Partners GmbH — Founding Validator. MiFID II Art. 17 + EU AI Act Art. 14 compliance node. Enforces Verun score tiers and operation gates.",
     "status": "active",
     "policy": "score_based",
     "weight": 1,

@@ -232,7 +232,7 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   <a class="nav-item" onclick="show('overview')" href="javascript:void(0)"><span class="nav-item-icon">📖</span> Overview</a>
   <a class="nav-item" onclick="show('architecture')" href="javascript:void(0)"><span class="nav-item-icon">🏗️</span> Architecture</a>
   <a class="nav-item" onclick="show('trust-gates')" href="javascript:void(0)"><span class="nav-item-icon">🔐</span> Trust Score Gates</a>
-  <a class="nav-item" onclick="show('mica')" href="javascript:void(0)"><span class="nav-item-icon">⚖️</span> Potential MiCA Features</a>
+  <a class="nav-item" onclick="show('compliance')" href="javascript:void(0)"><span class="nav-item-icon">⚖️</span> MiFID II + AI Act</a>
   <a class="nav-item" onclick="show('validators')" href="javascript:void(0)"><span class="nav-item-icon">🛡️</span> Validator Model</a>
   <div class="nav-group-label">API Reference</div>
   <a class="nav-item" onclick="show('api')" href="javascript:void(0)"><span class="nav-item-icon">⚡</span> Endpoints</a>
@@ -280,10 +280,10 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
     <span class="live-badge"><span class="live-dot"></span>LIVE on Stellar Testnet</span>
     &nbsp;&nbsp;<span style="font-size:12px;color:var(--text-muted)">Deployed April 2026 · 4 API Endpoints · v0.1.0</span>
   </p>
-  <p class="lead">Technical documentation for <strong>Verun Protocol</strong> — the AI Agent Trust Layer with potential MiCA features for regulated European finance, built on Stellar by <a href="https://www.bcpp.io" target="_blank">BCP Partners GmbH</a>.</p>
+  <p class="lead">Technical documentation for <strong>Verun Protocol</strong> — the AI Agent Trust ID for regulated European finance, designed to support MiFID II + EU AI Act audit obligations, built on Stellar by <a href="https://www.bcpp.io" target="_blank">BCP Partners GmbH</a>.</p>
   <div class="hint info">
     🔐 <strong>"KYC for humans. KYA for agents. Both auditable on-chain."</strong><br>
-    Verun issues consensus-based Trust Scores (0–1000) that gate access to the tokenforge Chain API. Every evaluation is anchored as a Memo Transaction on Stellar — immutable, auditable. Potential on-chain MiCA features — to be checked and prior to legal audit.
+    Verun issues consensus-based Trust Scores (0–1000) that gate access to the tokenforge Chain API. Every evaluation is anchored as a Memo Transaction on Stellar — immutable, auditable. Designed to generate machine-readable audit trails for MiFID II Art. 17 + EU AI Act Art. 14.
   </div>
   <div class="parts-grid">
     <a class="part-card" onclick="show('architecture')" href="javascript:void(0)">
@@ -312,7 +312,7 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   <h2>What is Verun?</h2>
   <p>As AI agents begin autonomously executing token transfers, minting securities, and placing investment orders, there is no existing standard for establishing <em>who</em> an agent is, whether it can be trusted, and whether it is permitted to act in a regulated context.</p>
   <p>Verun solves this with the <strong>Verun Accredited Agent Score (0–1000)</strong>: a consensus-based trust verdict issued by registered validators, anchored on Stellar for every evaluation, and enforced at the tokenforge Chain API gate.</p>
-  <div class="hint note">🔮 <strong>Regulatory context:</strong> Verun is designed to generate the machine-readable audit trail relevant to MiCA Art. 67, Art. 72, and Art. 75 for agents acting in regulated financial workflows. These are potential on-chain features — not verified compliance. Verun aggregates existing compliance signals into a single, auditable verdict; legal audit planned Q3 2026.</div>
+  <div class="hint note">🔮 <strong>Regulatory context:</strong> Verun is designed to generate the machine-readable audit trail relevant to <strong>MiFID II Art. 17</strong> (algorithmic trading governance + records) and <strong>EU AI Act Art. 14</strong> (high-risk-AI human oversight + logging) for agents acting in regulated financial workflows. Verun aggregates existing compliance signals into a single, auditable verdict; legal audit planned Q3 2026.</div>
   <h2>Key Facts</h2>
   <table class="doc-table">
     <thead><tr><th>Property</th><th>Value</th></tr></thead>
@@ -427,42 +427,42 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
       <tr><td class="td-name" style="color:#6b7280!important">BLOCK</td><td>0 – 299</td><td>None — access denied</td><td>0%</td></tr>
     </tbody>
   </table>
-  <div class="next-prev"><button class="next-btn" onclick="show('mica')"><div><span class="next-btn-lbl">Next</span>Potential MiCA Features →</div></button></div>
+  <div class="next-prev"><button class="next-btn" onclick="show('compliance')"><div><span class="next-btn-lbl">Next</span>MiFID II + AI Act →</div></button></div>
 </div>
 
-<!-- MICA -->
-<div id="page-mica" style="display:none">
-  <h1>Potential On-Chain MiCA Features</h1>
-  <p class="lead">Verun is designed with MiCA obligations in mind for AI agents acting in regulated European financial operations. The features below are <strong>potential on-chain implementations</strong> — to be checked and prior to legal audit. Not a compliance statement.</p>
-  <div class="hint success">⚖️ <strong>Scope:</strong> MiCA (Markets in Crypto-Assets Regulation) came into full effect December 2024 across all EU member states. The features below are <strong>potential on-chain implementations</strong> designed to support MiCA alignment. They are not a legal compliance statement and have not yet been audited.</div>
-  <h2>Potential On-Chain Features per Article</h2>
+<!-- COMPLIANCE: MiFID II + AI Act -->
+<div id="page-compliance" style="display:none">
+  <h1>MiFID II + EU AI Act Alignment</h1>
+  <p class="lead">Verun is designed to generate the machine-readable audit trail required by <strong>MiFID II Art. 17</strong> (algorithmic trading governance) and the <strong>EU AI Act Art. 14</strong> (high-risk-AI human oversight + logging) for agents acting in regulated European financial workflows.</p>
+  <div class="hint success">⚖️ <strong>Scope:</strong> This is a B2B trust layer for institutional agentic finance. The features below are designed to support the audit obligations financial institutions already carry under MiFID II + the EU AI Act. They are not a legal compliance statement and have not yet been audited.</div>
+  <h2>Mapping per Article</h2>
   <table class="doc-table">
-    <thead><tr><th>Article</th><th>Requirement</th><th>Potential Verun Feature</th></tr></thead>
+    <thead><tr><th>Article</th><th>Requirement</th><th>Verun Feature</th></tr></thead>
     <tbody>
       <tr>
-        <td class="td-name">Art. 67</td>
-        <td>Operational Risk Management</td>
-        <td>Every evaluation anchored on-chain. Anchor failure is non-blocking — verdict is preserved regardless.</td>
+        <td class="td-name">MiFID II Art. 17</td>
+        <td>Algorithmic trading governance + complete records</td>
+        <td>Every agent evaluation anchored on Stellar via Memo transaction. Score, consensus, operation, timestamp — immutable, queryable.</td>
       </tr>
       <tr>
-        <td class="td-name">Art. 68</td>
-        <td>CASP Authorization</td>
-        <td>Score-gated access. No agent may call tokenforge Chain API without a valid Verun verdict ≥ 300.</td>
+        <td class="td-name">EU AI Act Art. 14</td>
+        <td>Human oversight of high-risk AI systems</td>
+        <td>Human-in-the-loop approval required above defined operation tiers. Approval hash co-signed via Stellar native multi-sig.</td>
       </tr>
       <tr>
-        <td class="td-name">Art. 72</td>
-        <td>AML/CFT Obligations</td>
-        <td>2-of-N validator consensus before any transfer or mint operation. Single-validator manipulation impossible.</td>
+        <td class="td-name">EU AI Act Art. 12</td>
+        <td>Automatic logging of high-risk AI activity</td>
+        <td>Every verdict, every approval, every revocation written to Stellar — replayable audit log.</td>
       </tr>
       <tr>
-        <td class="td-name">Art. 75</td>
-        <td>Record-Keeping / Audit Trail</td>
-        <td>Stellar Memo Transaction per verdict. Timestamp, agentId, score, consensus, operation all written on-chain.</td>
+        <td class="td-name">MiFID II Art. 17(2)</td>
+        <td>Kill-switch / system controls</td>
+        <td>SBT revocation flow — credential burnable by issuer or supervisor, instantly invalidating the agent's permissioned access.</td>
       </tr>
     </tbody>
   </table>
-  <div class="hint note">🔮 <strong>tokenforge alignment:</strong> tokenforge (TokenSuite) is eWpG-compliant, BaFin-relevant, and MiFID II-ready. The Verun × tokenforge integration is designed to extend this compliance stack to the agentic layer — subject to legal review.</div>
-  <div class="hint info">📋 <strong>Legal audit status:</strong> MiCA compliance audit is planned for Q3 2026 as part of the Stellar Foundation grant milestones. Until then, all features on this page represent design intent, not verified compliance.</div>
+  <div class="hint note">🔮 <strong>tokenforge alignment:</strong> tokenforge (TokenSuite) is eWpG-compliant, BaFin-relevant, and MiFID II-ready. The Verun × tokenforge integration extends this compliance stack to the agentic layer — subject to legal review.</div>
+  <div class="hint info">📋 <strong>Legal audit status:</strong> Legal audit planned for Q3 2026 as part of the Stellar Foundation grant milestones. Until then, all features on this page represent design intent, not verified compliance.</div>
   <div class="next-prev"><button class="next-btn" onclick="show('validators')"><div><span class="next-btn-lbl">Next</span>Validator Model →</div></button></div>
 </div>
 
@@ -801,9 +801,9 @@ cd verun-stellar-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
   <table class="doc-table">
     <thead><tr><th>Regulation</th><th>Article</th><th>Verun mechanism</th></tr></thead>
     <tbody>
-      <tr><td class="td-name">MiCA</td><td>Art. 68</td><td>2-of-3 validator consensus + on-chain audit trail</td></tr>
-      <tr><td class="td-name">EU AI Act</td><td>Art. 14</td><td>Validators are human/institutional — every action gated by their consensus</td></tr>
-      <tr><td class="td-name">MiFID II</td><td>Art. 17</td><td>Single-TX kill-switch via revoke endpoint (~5s)</td></tr>
+      <tr><td class="td-name">MiFID II</td><td>Art. 17</td><td>2-of-3 validator consensus + on-chain audit trail · single-TX kill-switch via revoke endpoint (~5s)</td></tr>
+      <tr><td class="td-name">EU AI Act</td><td>Art. 14</td><td>Validators are human/institutional — every action gated by their consensus (human oversight)</td></tr>
+      <tr><td class="td-name">EU AI Act</td><td>Art. 12</td><td>Automatic logging — every verdict + approval anchored on Stellar</td></tr>
     </tbody>
   </table>
 
@@ -813,7 +813,7 @@ cd verun-stellar-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
 <!-- ROADMAP -->
 <div id="page-roadmap" style="display:none">
   <h1>Mainnet Roadmap</h1>
-  <p class="lead">From Stellar Testnet MVP to production infrastructure with legal-audited MiCA alignment.</p>
+  <p class="lead">From Stellar Testnet MVP to production infrastructure with legal-audited MiFID II + EU AI Act alignment.</p>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-left">
@@ -858,11 +858,11 @@ cd verun-stellar-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
       </div>
       <div class="tl-body">
         <div class="tl-period">Q3 2026</div>
-        <div class="tl-title">Stellar Mainnet + MiCA Audit</div>
-        <div class="tl-desc">Migration from testnet to mainnet. Third production validator onboarded. Full MiCA legal audit + compliance documentation. Stellar Foundation grant milestone delivery.</div>
+        <div class="tl-title">Stellar Mainnet + Legal Audit</div>
+        <div class="tl-desc">Migration from testnet to mainnet. Third production validator onboarded. Full MiFID II + EU AI Act legal audit + compliance documentation. Stellar Foundation grant milestone delivery.</div>
         <div class="tl-chips">
           <span class="chip">Mainnet</span>
-          <span class="chip">MiCA audit</span>
+          <span class="chip">MiFID II + AI Act audit</span>
           <span class="chip">3rd validator</span>
           <span class="chip">Grant M3</span>
         </div>
@@ -1277,7 +1277,7 @@ Docs: https://verun-stellar-mvp.vercel.app/docs.html</pre>
 
 <script>
 // Page switching
-const pages = ['welcome','overview','architecture','trust-gates','mica','validators','api','anchor','sbt','x402','agents','roadmap'];
+const pages = ['welcome','overview','architecture','trust-gates','compliance','validators','api','anchor','sbt','x402','agents','roadmap'];
 function show(id) {
   pages.forEach(p => {
     const el = document.getElementById('page-' + p);
