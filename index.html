@@ -355,7 +355,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 0}
   .arch-node{flex:1 1 50%;min-width:0}
   .terminal-panel{font-size:11px}
   .footer{font-size:12px}
-  .footer-grid{grid-template-columns:1fr;gap:24px}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:18px}
+  .footer-links{flex-wrap:wrap;gap:14px 18px}
+  .reg-anchor-grid{grid-template-columns:1fr !important}
+  .platform-grid{grid-template-columns:1fr}
+}
+/* Tablet 2-col grid for validator + regulatory cards */
+@media(min-width:601px) and (max-width:900px){
+  .platform-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -569,7 +576,7 @@ Docs: https://verun-stellar-mvp.vercel.app/docs.html</pre>
   <div class="container">
     <div class="section-label">EU Regulatory Anchors</div>
     <h2 class="section-h2">Primary regulatory anchors.</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px">
+    <div class="reg-anchor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px">
       <div class="platform-card" style="border-left:3px solid var(--purple)">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
           <div class="plat-name" style="font-size:17px">EU AI Act</div>
