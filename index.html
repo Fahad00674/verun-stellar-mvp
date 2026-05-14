@@ -398,6 +398,8 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .container{padding:0 20px}
   /* Phone screen — keep desktop-like sizes since mobile phone is now near-full width */
   .nav{height:56px}
+  /* Demo section header — left align on mobile, center on desktop */
+  .demo-head{text-align:left !important}
   .nav-logo{font-size:15px}
   .nav-logo .tag{font-size:8px;padding:2px 6px}
   .stellar-badge{font-size:10px;padding:3px 9px}
@@ -593,7 +595,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 <!-- DEMO -->
 <section class="section demo-section" id="demo">
   <div class="container">
-    <div>
+    <div class="demo-head" style="text-align:center">
       <div class="section-label">Interactive Demo</div>
       <h2 class="section-h2" style="margin-bottom:8px">Test how your agent <span class="muted">is scoring.</span></h2>
     </div>
@@ -699,8 +701,8 @@ print('  → Click the Stellar Expert link to see the live transaction.')
         <p style="font-size:14px;color:var(--text3);line-height:1.6">Applies when agents route orders for regulated instruments.</p>
       </div>
     </div>
-    <div style="margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;display:flex;align-items:flex-start;gap:18px;box-shadow:var(--shadow-sm)">
-      <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;padding:5px 12px;border-radius:6px;border:1px solid var(--border);color:var(--text3);white-space:nowrap;margin-top:1px">DISCLOSURE</span>
+    <div style="margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;display:flex;align-items:center;gap:18px;box-shadow:var(--shadow-sm)">
+      <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;padding:5px 12px;border-radius:6px;border:1px solid var(--border);color:var(--text3);white-space:nowrap;flex-shrink:0">DISCLOSURE</span>
       <p style="font-size:14px;color:var(--text2);line-height:1.65">This page reflects the team's design intent. Independent legal review is planned. Nothing here constitutes certified compliance or legal advice.</p>
     </div>
   </div>
