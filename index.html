@@ -6,18 +6,21 @@
 <title>Verun Network — The Trust ID for Agentic Finance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #ffffff;
-  --bg2: #f3f5fb;            /* soft lavender section bg */
-  --bg3: #f8faf9;             /* card-inner soft */
+  --bg2: #f8f9fe;            /* lavender section bg — reference exact */
+  --bg3: #f3fdf9;             /* light green ambient */
   --card: #ffffff;
-  --card2: #ecfdf5;
-  --teal: #16a34a;
+  --card2: #e6fbf5;
+  --teal: #16a34a;             /* brand green — used in deck/video */
+  --teal-bright: #22c55e;      /* hero gradient top */
+  --teal-soft: #dcfce7;        /* brand green tinted bg */
   --teal-dim: rgba(22,163,74,0.08);
   --teal-border: rgba(22,163,74,0.22);
   --purple: #7B61FF;
+  --purple-soft: #efe9ff;      /* lavender card tint */
   --purple-dim: rgba(123,97,255,0.08);
   --purple-border: rgba(123,97,255,0.22);
   --green: #16a34a;
@@ -25,58 +28,60 @@
   --red: #dc2626;
   --red-dim: rgba(220,38,38,0.08);
   --amber: #d97706;
+  --amber-soft: #fef3e0;       /* gold card tint */
   --amber-dim: rgba(217,119,6,0.08);
   --blue: #2563eb;
   --blue-dim: rgba(37,99,235,0.08);
-  --text: #0a1628;
-  --text2: #475569;
-  --text3: #94a3b8;
-  --border: rgba(15,23,42,0.07);     /* unified hairline */
-  --border-strong: rgba(15,23,42,0.10);
-  --border2: rgba(22,163,74,0.18);
-  --shadow-sm: 0 1px 2px rgba(15,23,42,0.04);
-  --shadow-md: 0 1px 2px rgba(15,23,42,0.04), 0 8px 24px rgba(15,23,42,0.06);
-  --shadow-lg: 0 2px 4px rgba(15,23,42,0.05), 0 18px 44px rgba(15,23,42,0.08);
+  --text: #0a2540;             /* reference body dark navy */
+  --text2: #62798f;            /* reference muted */
+  --text3: #8898aa;            /* reference light */
+  --border: #e5ebf7;           /* reference border blueish hairline */
+  --border-strong: #d6dfee;
+  --border2: rgba(0,148,112,0.18);
+  --shadow-sm: 0 4px 14px 0 rgba(0,0,0,0.10);
+  --shadow-md: 0 4px 14px 0 rgba(10,37,64,0.18);
+  --shadow-lg: 0 12px 32px 0 rgba(10,37,64,0.20);
   --shadow: var(--shadow-md);
-  --radius: 18px;
-  --radius-sm: 10px;
+  --radius: 24px;              /* reference card radius */
+  --radius-sm: 10px;            /* reference button radius */
   --radius-lg: 24px;
-  --mono: 'IBM Plex Mono', monospace;
-  --sans: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', Menlo, monospace;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;font-size:16px;letter-spacing:-0.005em;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--sans);background:var(--bg2);color:var(--text);line-height:1.55;font-size:16px;letter-spacing:-0.005em;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 a{color:var(--teal);text-decoration:none}
-.container{max-width:1180px;margin:0 auto;padding:0 28px}
-.section{padding:clamp(64px,7vw,104px) 0}
-.section-head{margin-bottom:clamp(36px,4vw,52px)}
+.container{max-width:1200px;margin:0 auto;padding:0 32px}
+.section{padding:100px 0}
+.section-head{margin-bottom:48px}
 
 /* NAV */
-.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:0 28px;height:68px;display:flex;align-items:center;justify-content:space-between}
+.nav{position:sticky;top:0;z-index:100;background:rgba(248,249,254,0.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;height:100%}
 .nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--text);letter-spacing:-0.01em}
-.nav-logo .tag{font-size:9px;font-weight:800;background:var(--teal);color:#fff;padding:3px 8px;border-radius:5px;letter-spacing:0.1em}
+.nav-logo .tag{font-family:var(--mono);font-size:10px;font-weight:700;background:var(--teal-bright);color:#fff;padding:3px 8px;border-radius:5px;letter-spacing:0.1em}
 .nav-links{display:flex;align-items:center;gap:32px}
 .nav-links a{font-size:14px;font-weight:500;color:var(--text2);transition:color 0.2s}
 .nav-links a:hover{color:var(--teal)}
-.stellar-badge{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--teal);background:var(--teal-dim);border:1px solid var(--teal-border);padding:5px 14px;border-radius:24px;font-family:var(--mono)}
+.stellar-badge{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:var(--teal);background:#dcfce7;border:0;padding:7px 14px;border-radius:20px;font-family:var(--mono);letter-spacing:0.04em}
 .stellar-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.5)}}
 
 /* HERO */
-.hero{padding:80px 0 0;position:relative;overflow:visible;background:linear-gradient(160deg,#1a9e52 0%,#22c55e 60%,#16a34a 100%);padding-bottom:0}
-.hero-inner{position:relative;display:grid;grid-template-columns:1.05fr 0.95fr;align-items:end;gap:0;padding-bottom:0}
-.hero-copy{text-align:left;padding-bottom:120px}
-.hero h1{font-size:clamp(46px,6vw,88px);font-weight:800;line-height:1.02;color:#fff;margin-bottom:26px;letter-spacing:-0.03em}
+.hero{padding:80px 0 60px;position:relative;overflow:visible;background:linear-gradient(#22c55e 0%,#16a34a 100%)}
+.hero-inner{position:relative;display:grid;grid-template-columns:1.05fr 0.95fr;align-items:start;gap:0;padding-bottom:0}
+.hero-copy{text-align:left;padding-bottom:0}
+.hero h1{font-size:clamp(44px,5.5vw,72px);font-weight:800;line-height:1.02;color:#fff;margin-bottom:24px;letter-spacing:-0.035em}
 .hero h1 .hl{color:#fff}
-.hero-sub{font-size:20px;color:rgba(255,255,255,0.92);max-width:520px;margin:0 0 48px;line-height:1.55;font-weight:400}
+.hero-sub{font-size:20px;color:rgba(255,255,255,0.92);max-width:520px;margin:0 0 32px;line-height:1.55;font-weight:400;letter-spacing:-0.004em}
 .hero-sub strong{color:#fff;font-weight:700}
 .hero-btns{display:flex;justify-content:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:0}
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:15px;font-weight:700;cursor:pointer;border:none;border-radius:12px;padding:14px 26px;transition:all 0.2s;letter-spacing:-0.005em}
-.btn-teal{background:#fff;color:#16a34a;box-shadow:0 2px 6px rgba(15,23,42,0.10)}
-.btn-teal:hover{background:#f0fdf4;box-shadow:0 6px 24px rgba(15,23,42,0.18);transform:translateY(-1px)}
-.btn-outline{background:rgba(255,255,255,0.12);color:#fff;border:1.5px solid rgba(255,255,255,0.45);backdrop-filter:blur(4px)}
-.btn-outline:hover{background:rgba(255,255,255,0.22);border-color:rgba(255,255,255,0.7)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;border:none;border-radius:10px;padding:14px 28px;transition:all 0.2s;letter-spacing:-0.005em}
+.btn-teal{background:#fff;color:var(--teal);box-shadow:0 4px 14px 0 rgba(0,0,0,0.10)}
+.btn-teal:hover{background:#f3fdf9;box-shadow:0 6px 24px rgba(0,0,0,0.15);transform:translateY(-1px)}
+.btn-outline{background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.5)}
+.btn-outline:hover{background:rgba(255,255,255,0.28);border-color:rgba(255,255,255,0.7)}
 .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid var(--border)}
 .pill-teal{background:var(--teal-dim);color:var(--teal);border-color:var(--teal-border)}
 .pill-purple{background:var(--purple-dim);color:var(--purple);border-color:var(--purple-border)}
@@ -84,74 +89,96 @@ a{color:var(--teal);text-decoration:none}
 .pill-amber{background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25)}
 
 /* HERO PHONE — iPhone 15 Pro style mockup showing live demo content (overflows into white section) */
-.hero-phone-wrap{display:flex;justify-content:center;align-items:flex-end;padding:60px 0 0;position:relative;margin-bottom:-180px;z-index:5}
+.hero-phone-wrap{display:flex;justify-content:center;align-items:flex-start;padding:0;position:relative;margin-bottom:-180px;z-index:5}
 .hero-phone{
-  width:320px;height:660px;
-  background:linear-gradient(145deg,#2a2f3a 0%,#1a1f2a 50%,#2a2f3a 100%);
-  border-radius:52px;padding:10px;
-  /* Apple-style layered soft shadow — multiple low-opacity layers create natural cinematic depth */
+  width:340px;height:716px;
+  background:#0a2540;
+  border-radius:54px;padding:8px;
+  /* Reference exact shadow: subtle ring + dark shadow + green ambient glow */
   box-shadow:
-    0 0 0 1px rgba(74,81,96,0.4),
-    0 2px 4px rgba(15,23,42,0.04),
-    0 8px 16px rgba(15,23,42,0.06),
-    0 22px 44px rgba(15,23,42,0.08),
-    0 48px 96px rgba(15,23,42,0.10),
-    0 88px 160px rgba(15,23,42,0.10);
+    0 0 0 2px rgba(255,255,255,0.06),
+    0 30px 60px 0 rgba(0,0,0,0.25),
+    0 60px 120px 0 rgba(22,163,74,0.3);
   position:relative;
 }
 .hero-phone::before{content:'';position:absolute;right:-2px;top:160px;width:4px;height:60px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
 .hero-phone::after{content:'';position:absolute;left:-2px;top:118px;width:4px;height:34px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 52px 0 #4a5160,0 100px 0 #4a5160}
 .hero-phone-island{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:78px;height:22px;background:#000;border-radius:14px;z-index:5}
 .hero-phone-screen{position:relative;width:100%;height:100%;background:#fff;border-radius:39px;overflow:hidden}
-.hero-phone-statusbar{position:absolute;top:13px;left:0;right:0;display:flex;justify-content:space-between;padding:0 26px;font-size:11px;font-weight:700;color:#0f172a;z-index:4}
-.hero-phone-sb-icons{font-size:9px;letter-spacing:1px}
-.hero-phone-img{position:absolute;top:36px;left:0;width:100%;height:calc(100% - 36px);object-fit:cover;object-position:top center;display:block}
+/* Hero phone content — native HTML/CSS (replaces hero-phone-screen.png) */
+.hp-content{position:absolute;top:50px;left:0;right:0;bottom:0;padding:0 22px;display:flex;flex-direction:column;gap:14px;font-family:var(--sans);overflow:hidden}
+.hp-nav{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.hp-back{font-family:var(--mono);font-size:12px;color:#94a3b8;font-weight:500}
+.hp-counter{font-family:var(--mono);font-size:12px;color:#94a3b8;font-weight:500}
+.hp-next{font-family:var(--mono);font-size:12px;font-weight:600;background:var(--teal);color:#fff;padding:7px 14px;border-radius:20px;display:inline-flex;align-items:center;gap:2px}
+.hp-steps{display:flex;align-items:center;gap:4px;padding:0 4px}
+.hp-step-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:600;flex-shrink:0}
+.hp-step-dot.active{background:var(--teal);color:#fff}
+.hp-step-dot.inactive{background:#fff;border:1px solid #e2e8f0;color:#94a3b8}
+.hp-step-line{flex:1;height:1px;background:#e2e8f0}
+.hp-step-label{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--teal);letter-spacing:0.06em;margin-top:4px}
+.hp-title{font-size:15px;font-weight:700;color:#0f172a;letter-spacing:-0.01em;line-height:1.3;margin-top:-6px}
+.hp-card{background:#f1f5f9;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px}
+.hp-card-label{font-family:var(--mono);font-size:9px;font-weight:600;color:#94a3b8;letter-spacing:0.08em}
+.hp-card-value{font-family:var(--mono);font-size:11.5px;color:#0f172a;font-weight:500}
+.hp-checks{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.hp-check{display:flex;align-items:flex-start;gap:8px;font-family:var(--mono);font-size:10.5px;color:#475569;line-height:1.35}
+.hp-tick{width:14px;height:14px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0;margin-top:1px}
 
 /* Ensure the next section after the hero has breathing room for the phone overflow */
-.modes-section{padding-top:160px}
+.market-section{background:#fff;padding-top:60px;padding-bottom:60px}
+.market-label{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8898aa;padding:5px 12px;border-radius:20px;border:1px solid #e5ebf7;background:#f8f9fe;margin-bottom:32px}
+.market-divider{height:1px;background:var(--border);margin-bottom:48px;width:90%}
+.market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.market-stat{display:flex;flex-direction:column}
+.ms-num{font-size:clamp(34px,3.5vw,44px);font-weight:700;color:#8898aa;line-height:1.05;letter-spacing:-0.025em;margin-bottom:12px}
+.market-stat:first-child .ms-num{color:var(--text)}
+.ms-plus{color:inherit;font-weight:700;margin-left:1px}
+.market-stat:first-child .ms-plus{color:var(--teal)}
+.ms-desc{font-size:14px;color:var(--text2);line-height:1.4;letter-spacing:-0.005em}
+.market-sources{font-family:var(--mono);font-size:11px;color:#8898aa;margin-top:24px;line-height:1.55;letter-spacing:0.02em}
+.modes-section{padding-top:100px}
 
 /* === MOBILE HERO OVERRIDES (placed AFTER defaults so cascade wins without !important) === */
 @media(max-width:760px){
   .hero-inner{grid-template-columns:1fr;gap:0}
-  .hero-copy{padding:0 0 20px;text-align:left}
-  .hero h1{font-size:48px;line-height:1.02;text-align:left;letter-spacing:-0.03em}
-  .hero-sub{font-size:19px;text-align:left;margin:0 0 32px;line-height:1.55}
-  .hero-btns{justify-content:flex-start}
-  .hero-phone-wrap{padding:0 0 32px;margin-bottom:0;align-items:center;z-index:1}
-  .hero-phone{width:248px;height:512px}
+  .hero-copy{padding:0 0 36px;text-align:left}
+  .hero h1{font-size:62px;line-height:1.02;text-align:left;letter-spacing:-0.035em}
+  .hero-sub{font-size:19px;text-align:left;margin:0 0 36px;line-height:1.5}
+  .hero-btns{justify-content:flex-start;margin-bottom:0}
+  .hero-phone-wrap{padding:0 0 50px;margin-bottom:0;align-items:center;z-index:1}
+  .hero-phone{width:min(340px,calc(100vw - 60px));height:auto;aspect-ratio:340/716;padding:8px}
   .hero-phone::before{top:140px;height:50px}
   .hero-phone::after{top:100px;height:30px;box-shadow:0 46px 0 #4a5160,0 90px 0 #4a5160}
-  .hero-phone-island{width:70px;height:20px;top:12px}
-  .hero-phone-statusbar{top:11px;font-size:10px;padding:0 22px}
-  .hero-phone-img{top:32px;height:calc(100% - 32px)}
+  .hero-phone-island{width:90px;height:24px;top:14px}
 }
 
-/* 3 MODES — premium card system */
-.modes-section{background:var(--bg2)}
-.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
-.mode-card{padding:32px 30px;position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);transition:transform 0.25s ease, box-shadow 0.25s ease}
-.mode-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.modes-grid > .mode-card:nth-child(1){background:linear-gradient(135deg,rgba(22,163,74,0.06) 0%,rgba(22,163,74,0.02) 30%,#ffffff 65%)}
-.modes-grid > .mode-card:nth-child(2){background:linear-gradient(135deg,rgba(123,97,255,0.06) 0%,rgba(123,97,255,0.02) 30%,#ffffff 65%)}
-.modes-grid > .mode-card:nth-child(3){background:linear-gradient(135deg,rgba(217,119,6,0.06) 0%,rgba(217,119,6,0.02) 30%,#ffffff 65%)}
-.mode-num{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--text3);margin-bottom:22px;letter-spacing:0.14em}
-.mode-icon{margin-bottom:24px;width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:#ecfdf5;border:1px solid #d1fae5;flex-shrink:0}
+/* 3 MODES — reference exact */
+.modes-section{background:var(--bg2);padding:100px 0}
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.mode-card{padding:32px;position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:none;transition:transform 0.25s ease}
+.mode-card:hover{transform:translateY(-2px)}
+.modes-grid > .mode-card:nth-child(1){background:linear-gradient(135deg,#ffffff 0%,#ffffff 60%,#dcfce7 100%)}
+.modes-grid > .mode-card:nth-child(2){background:linear-gradient(135deg,#ffffff 0%,#ffffff 60%,#efe9ff 100%)}
+.modes-grid > .mode-card:nth-child(3){background:linear-gradient(135deg,#ffffff 0%,#ffffff 60%,#fef3e0 100%)}
+.mode-num{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--text3);margin-bottom:20px;letter-spacing:0.12em}
+.mode-icon{margin-bottom:20px;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#dcfce7;border:0;flex-shrink:0}
 .mode-icon svg{display:block}
-.mode-card:nth-child(2) .mode-icon{background:#eef2ff;border-color:#e0e7ff}
-.mode-card:nth-child(3) .mode-icon{background:#fef3c7;border-color:#fde68a}
-.mode-title{font-size:21px;font-weight:700;color:var(--text);margin-bottom:12px;letter-spacing:-0.015em;line-height:1.25}
-.mode-desc{font-size:15px;color:var(--text2);line-height:1.65;margin-bottom:20px}
+.mode-card:nth-child(2) .mode-icon{background:#efe9ff}
+.mode-card:nth-child(3) .mode-icon{background:#fef3e0}
+.mode-title{font-size:22px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-0.015em;line-height:1.2}
+.mode-desc{font-size:14.5px;color:var(--text2);line-height:1.55;margin-bottom:0;letter-spacing:-0.005em}
 .mode-tag{font-size:10px;font-weight:700;padding:5px 12px;border-radius:8px;display:inline-block;letter-spacing:0.06em;text-transform:uppercase}
 .mode-tag.teal{background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border)}
 .mode-tag.amber{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(255,176,32,0.25)}
 .mode-tag.purple{background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border)}
 .mode-arrow{display:none}
 
-/* SECTION HEADER — premium scale + two-tone treatment */
-.section-label{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
-.section-h2{font-size:clamp(34px,4.6vw,58px);font-weight:800;color:var(--text);line-height:1.05;margin-bottom:20px;letter-spacing:-0.025em}
-.section-h2 .muted{color:#94a3b8;font-weight:800}
-.section-sub{font-size:17px;color:var(--text2);line-height:1.6;max-width:640px}
+/* SECTION HEADER — reference exact */
+.section-label{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+.section-h2{font-size:clamp(36px,4.5vw,54px);font-weight:800;color:var(--text);line-height:1.05;margin-bottom:48px;letter-spacing:-0.03em}
+.section-h2 .muted{color:#8898aa;font-weight:600}
+.section-sub{font-size:16px;color:var(--text2);line-height:1.55;max-width:640px}
 
 /* DEMO */
 .demo-section{background:var(--bg)}
@@ -287,21 +314,27 @@ a{color:var(--teal);text-decoration:none}
 .log-msg.amber{color:var(--amber)}
 .log-msg.dim{color:var(--text3)}
 
-/* PLATFORM REGISTRY — clean white cards, unified with modes section */
-.platform-section{background:#fff}
-.platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
-.platform-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:32px 30px;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:var(--shadow-md)}
-.platform-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.platform-card.featured{border-color:rgba(22,163,74,0.16)}
-.platform-grid > .platform-card:nth-child(1){background:linear-gradient(135deg,rgba(22,163,74,0.05) 0%,rgba(22,163,74,0.015) 30%,#ffffff 65%)}
-.platform-grid > .platform-card:nth-child(2){background:linear-gradient(135deg,rgba(123,97,255,0.05) 0%,rgba(123,97,255,0.015) 30%,#ffffff 65%)}
-.platform-grid > .platform-card:nth-child(3){background:linear-gradient(135deg,rgba(217,119,6,0.05) 0%,rgba(217,119,6,0.015) 30%,#ffffff 65%)}
-.reg-anchor-grid > .platform-card:nth-child(1){background:linear-gradient(135deg,rgba(123,97,255,0.05) 0%,rgba(123,97,255,0.015) 30%,#ffffff 65%)}
-.reg-anchor-grid > .platform-card:nth-child(2){background:linear-gradient(135deg,rgba(22,163,74,0.05) 0%,rgba(22,163,74,0.015) 30%,#ffffff 65%)}
+/* PLATFORM REGISTRY — reference Trust Infrastructure exact: 30% white → color */
+.platform-section{background:#fff;padding:100px 0}
+.platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:0}
+.platform-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:transform 0.25s ease;box-shadow:none}
+.platform-card:hover{transform:translateY(-2px)}
+.platform-card.featured{border-color:var(--border)}
+.platform-grid > .platform-card:nth-child(1){background:linear-gradient(135deg,#ffffff 55%,#f0fdf4 100%)}
+.platform-grid > .platform-card:nth-child(2){background:linear-gradient(135deg,#ffffff 55%,#f5f3ff 100%)}
+.platform-grid > .platform-card:nth-child(3){background:linear-gradient(135deg,#ffffff 55%,#fffbeb 100%)}
+.reg-anchor-grid > .platform-card:nth-child(1){background:linear-gradient(135deg,#ffffff 55%,#f5f3ff 100%)}
+.reg-anchor-grid > .platform-card:nth-child(2){background:linear-gradient(135deg,#ffffff 55%,#f0fdf4 100%)}
 .plat-name{font-size:20px;font-weight:700;letter-spacing:-0.01em;color:var(--text)}
 .plat-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:16px}
 .plat-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;background:var(--bg2);color:var(--text2);border:1px solid var(--border)}
 .plat-tags{display:flex;flex-wrap:wrap;gap:6px}
+/* Redesigned founding validator badge — sits at bottom of card */
+.plat-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--teal);background:var(--teal-soft);padding:6px 12px;border-radius:999px;margin-top:auto;align-self:flex-start;text-transform:uppercase}
+.plat-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.plat-apply{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--amber);background:var(--amber-soft);padding:6px 12px;border-radius:999px;margin-top:auto;align-self:flex-start;text-transform:uppercase;text-decoration:none;transition:transform .15s}
+.plat-apply:hover{transform:translateX(2px)}
+.platform-card{display:flex;flex-direction:column}
 .plat-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
 .plat-name{font-size:15px;font-weight:700;color:var(--text)}
 .plat-score{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--teal)}
@@ -331,8 +364,8 @@ a{color:var(--teal);text-decoration:none}
 .arch-node .arch-tag{font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:8px;background:var(--bg2);padding:2px 7px;border-radius:4px;border:1px solid var(--border)}
 .arch-arr{display:flex;align-items:center;padding:0 4px;color:var(--teal);font-size:16px;opacity:0.35;flex-shrink:0}
 
-/* FOOTER — Stripe-style: dark navy */
-footer{background:#0b1220;border-top:1px solid #0b1220;padding:44px 0;color:#cbd5e1}
+/* FOOTER — reference exact: dark navy #0a1929 */
+footer{background:#0a1929;border-top:0;padding:48px 0;color:rgba(255,255,255,0.7);font-size:13px;line-height:1.55}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .footer-brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800;color:#fff}
 .footer-brand .tag{font-size:9px;font-weight:800;background:var(--teal);color:#fff;padding:2px 7px;border-radius:4px;letter-spacing:0.08em}
@@ -349,27 +382,36 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .arch-node{min-width:120px;border-bottom:1px solid var(--border)}
   .hero{padding:70px 0 56px}
   .section{padding:64px 0}
-  .modes-section{padding-top:200px !important}
+  .market-section{padding:80px 0 40px !important}
+  /* Reference mobile: stats stack 1-column with horizontal dividers between */
+  .market-grid{grid-template-columns:1fr;gap:0}
+  .market-stat{padding:28px 0;border-bottom:1px solid var(--border)}
+  .market-stat:last-child{border-bottom:0}
+  .market-stat:first-child{padding-top:0}
+  .ms-num{font-size:42px;margin-bottom:14px}
+  .ms-desc{font-size:15px}
+  .market-divider{width:100%}
   .modes-grid{grid-template-columns:1fr;gap:14px}
   .mode-card{padding:24px 22px}
 }
 @media(max-width:760px){
-  .container{padding:0 16px}
-  .nav{padding:0 16px;height:56px}
+  .container{padding:0 20px}
+  /* Phone screen — keep desktop-like sizes since mobile phone is now near-full width */
+  .nav{height:56px}
   .nav-logo{font-size:15px}
   .nav-logo .tag{font-size:8px;padding:2px 6px}
   .stellar-badge{font-size:10px;padding:3px 9px}
   .hero{padding:48px 0 0}
   .hero-inner{padding-bottom:0}
-  .hero-copy{padding-bottom:24px}
-  .hero h1{font-size:44px;line-height:1.04;letter-spacing:-0.028em}
-  .hero-sub{font-size:18px;line-height:1.55;margin-bottom:28px}
+  .hero-copy{padding-bottom:36px}
+  .hero h1{font-size:60px;line-height:1.02;letter-spacing:-0.035em}
+  .hero-sub{font-size:18px;line-height:1.5;margin-bottom:36px}
   .hero-btns{justify-content:flex-start}
   .btn{font-size:13px;padding:11px 22px}
   .phone-wrap{padding:24px 0 0;margin-right:0;justify-content:center}
   .phone{width:200px}
   .section{padding:48px 0}
-  .modes-section{padding-top:48px !important}
+  .modes-section{padding-top:40px !important}
   .section-title{font-size:26px}
   .section-sub{font-size:14px}
   .demo-stage{padding:18px 14px}
@@ -395,7 +437,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 }
 @media(max-width:640px){
   .nav-links{display:none}
-  .hero h1{font-size:42px}
+  .hero h1{font-size:54px}
   .mode-tabs{flex-direction:column;width:100%}
   .mode-tabs button{width:100%}
   .arch-node{flex:1 1 50%;min-width:0}
@@ -416,16 +458,18 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo">Verun <span class="tag">NETWORK</span></div>
-  <div class="nav-links">
-    <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
-    <a href="#platforms">Platforms</a>
-    <a href="/docs.html" target="_blank">Tech Docs</a>
-  </div>
-  <div class="nav-right">
-    <div class="stellar-badge">
-      <span class="stellar-dot"></span>
-      Stellar Testnet
+  <div class="container nav-inner">
+    <div class="nav-logo">Verun <span class="tag">NETWORK</span></div>
+    <div class="nav-links">
+      <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
+      <a href="#platforms">Platforms</a>
+      <a href="/docs.html" target="_blank">Tech Docs</a>
+    </div>
+    <div class="nav-right">
+      <div class="stellar-badge">
+        <span class="stellar-dot"></span>
+        Stellar Testnet
+      </div>
     </div>
   </div>
 </nav>
@@ -447,15 +491,74 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
         <div class="hero-phone">
           <div class="hero-phone-island"></div>
           <div class="hero-phone-screen">
-            <div class="hero-phone-statusbar">
-              <span>9:41</span>
-              <span class="hero-phone-sb-icons">●●●● ●●●</span>
+            <div class="hp-content">
+              <div class="hp-nav">
+                <span class="hp-back">← Back</span>
+                <span class="hp-counter">Step 1 of 3</span>
+                <span class="hp-next">Next →</span>
+              </div>
+              <div class="hp-steps">
+                <span class="hp-step-dot active">1</span>
+                <span class="hp-step-line"></span>
+                <span class="hp-step-dot inactive">2</span>
+                <span class="hp-step-line"></span>
+                <span class="hp-step-dot inactive">3</span>
+              </div>
+              <div class="hp-step-label">STEP 1 · PLATFORM SCAN</div>
+              <div class="hp-title">Agent scans platform registry</div>
+              <div class="hp-card">
+                <div class="hp-card-label">AGENT</div>
+                <div class="hp-card-value">agt_openclaw_01</div>
+              </div>
+              <div class="hp-card">
+                <div class="hp-card-label">INTENT</div>
+                <div class="hp-card-value">Security Token Investment</div>
+              </div>
+              <div class="hp-card">
+                <div class="hp-card-label">BUDGET</div>
+                <div class="hp-card-value">€ 5,000 EURC</div>
+              </div>
+              <div class="hp-card">
+                <div class="hp-card-label">REGION</div>
+                <div class="hp-card-value">EU · MiFID II Jurisdiction</div>
+              </div>
+              <div class="hp-checks">
+                <div class="hp-check"><span class="hp-tick">✓</span><span>Scanning investment platforms…</span></div>
+                <div class="hp-check"><span class="hp-tick">✓</span><span>Filtering: MiFID II + AI Act audit trail</span></div>
+                <div class="hp-check"><span class="hp-tick">✓</span><span>Match found: tokenforge (Score 920)</span></div>
+              </div>
             </div>
-            <img src="assets/hero-phone-screen.png" alt="Verun demo · Discovery mode · Step 1 platform scan" class="hero-phone-img">
           </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ADDRESSABLE MARKET · EU -->
+<section class="section market-section" id="market">
+  <div class="container">
+    <div class="market-label">ADDRESSABLE MARKET · EU</div>
+    <div class="market-divider"></div>
+    <div class="market-grid">
+      <div class="market-stat">
+        <div class="ms-num">5,000<span class="ms-plus">+</span></div>
+        <div class="ms-desc">regulated financial<br>institutions in EU<br>(potential validators)</div>
+      </div>
+      <div class="market-stat">
+        <div class="ms-num">€ 33.7T</div>
+        <div class="ms-desc">EU assets under<br>management<br>(TAM)</div>
+      </div>
+      <div class="market-stat">
+        <div class="ms-num">27</div>
+        <div class="ms-desc">EU member states<br>covered by single<br>MiFID II + AI Act framework</div>
+      </div>
+      <div class="market-stat">
+        <div class="ms-num">450M<span class="ms-plus">+</span></div>
+        <div class="ms-desc">projected agents<br>by 2030 — one per<br>EU resident</div>
+      </div>
+    </div>
+    <div class="market-sources">Sources: EBA register · Eurostat · McKinsey Agentic Finance forecast · ECB AUM data 2024. Numbers represent addressable market — not Verun's current customer base.</div>
   </div>
 </section>
 
@@ -466,27 +569,22 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
     <h2 class="section-h2">Three modes. <span class="muted">One protocol.</span></h2>
     <div class="modes-grid">
       <div class="mode-card">
-        <div class="mode-num">01 · DISCOVERY</div>
-        <div class="mode-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.5" y2="16.5"/></svg></div>
+        <div class="mode-num">01 · Discovery</div>
+        <div class="mode-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.5" y2="16.5"/></svg></div>
         <div class="mode-title">Agent finds the platform</div>
-        <div class="mode-desc">Agent scans verified platforms. Verun scores each — trust, compliance, fees. Agent selects the best match.</div>
-        <span class="mode-tag teal">Automated</span>
-        <div class="mode-arrow">→</div>
+        <div class="mode-desc">Agent scans the verified platform registry, filters by MiFID II + AI Act audit trail, identifies optimal match. No human input required.</div>
       </div>
       <div class="mode-card">
-        <div class="mode-num">02 · SUPERVISED</div>
-        <div class="mode-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7B61FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+        <div class="mode-num">02 · Supervised</div>
+        <div class="mode-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7B61FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
         <div class="mode-title">Human reviews and approves</div>
-        <div class="mode-desc">Agent sends a structured referral — platform score, risk tier, proposed action. Human approves or denies with one click.</div>
-        <span class="mode-tag amber">Human Gate</span>
-        <div class="mode-arrow">→</div>
+        <div class="mode-desc">Structured referral with platform score, risk tier, proposed action. One-click approve or deny. Audit trail anchored on Stellar.</div>
       </div>
       <div class="mode-card">
-        <div class="mode-num">03 · AUTONOMOUS</div>
-        <div class="mode-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="#d97706" stroke="#d97706" stroke-width="1.5" stroke-linejoin="round"><polygon points="13,2 4,14 11,14 10,22 20,9 13,9"/></svg></div>
+        <div class="mode-num">03 · Autonomous</div>
+        <div class="mode-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#d97706" stroke="#d97706" stroke-width="1.5" stroke-linejoin="round"><polygon points="13,2 4,14 11,14 10,22 20,9 13,9"/></svg></div>
         <div class="mode-title">Agent runs fully automated</div>
-        <div class="mode-desc">Human approves once. Agent executes autonomously within policy bounds — invest, transfer, rebalance. Every action anchored on Stellar. Revokable anytime.</div>
-        <span class="mode-tag purple">Verun-Powered</span>
+        <div class="mode-desc">Within policy bounds set by human. Revocable. Continuous monitoring. Every transaction logged on-chain. AI Act Art. 14 compliant by design.</div>
       </div>
     </div>
   </div>
@@ -565,44 +663,19 @@ print('  → Click the Stellar Expert link to see the live transaction.')
     <p class="section-sub">Two founding validators + one open slot for institutional partners.</p>
     <div class="platform-grid">
       <div class="platform-card featured">
-        <div style="margin-bottom:16px">
-          <span class="plat-tag" style="background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25);font-size:10px;font-weight:700;letter-spacing:0.1em">FOUNDING VALIDATOR</span>
-        </div>
         <div class="plat-name" style="margin-bottom:14px">tokenforge</div>
         <div class="plat-desc">White-label Security Token platform (TokenSuite).</div>
-        <div class="plat-tags">
-          <span class="plat-tag">eWpG</span>
-          <span class="plat-tag">BaFin</span>
-          <span class="plat-tag">MiFID II</span>
-          <span class="plat-tag">Genesis</span>
-        </div>
+        <div class="plat-badge"><span class="dot"></span>Founding Validator</div>
       </div>
       <div class="platform-card">
-        <div style="margin-bottom:16px">
-          <span class="plat-tag" style="background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25);font-size:10px;font-weight:700;letter-spacing:0.1em">FOUNDING VALIDATOR</span>
-        </div>
         <div class="plat-name" style="margin-bottom:14px">BCP Partners</div>
         <div class="plat-desc">Investment firm. Berlin-based German GmbH.</div>
-        <div class="plat-tags">
-          <span class="plat-tag">Genesis</span>
-          <span class="plat-tag">EU Regulated</span>
-          <span class="plat-tag">Advisory</span>
-          <span class="plat-tag">Berlin GmbH</span>
-        </div>
+        <div class="plat-badge"><span class="dot"></span>Founding Validator</div>
       </div>
       <div class="platform-card">
-        <div style="margin-bottom:16px">
-          <a href="https://www.bcpp.io/contact-us" target="_blank" style="display:inline-block;padding:4px 12px;background:transparent;color:var(--teal);border:1px solid var(--teal-border);border-radius:20px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-decoration:none;">APPLY →</a>
-        </div>
-        <div class="plat-name" style="margin-bottom:14px"><strong>Open Slot</strong></div>
-        <div class="plat-desc"></div>
-        <div class="plat-tags">
-          <span class="plat-tag">Bank</span>
-          <span class="plat-tag">Broker</span>
-          <span class="plat-tag">Neobank</span>
-          <span class="plat-tag">Exchange</span>
-          <span class="plat-tag">...</span>
-        </div>
+        <div class="plat-name" style="margin-bottom:14px">Open Slot</div>
+        <div class="plat-desc">Banks, brokers, neobanks, exchanges.</div>
+        <a href="https://www.bcpp.io/contact-us" target="_blank" class="plat-apply">Apply →</a>
       </div>
     </div>
   </div>
@@ -615,19 +688,13 @@ print('  → Click the Stellar Expert link to see the live transaction.')
     <div class="section-label">EU Regulatory Anchors</div>
     <h2 class="section-h2">Primary <span class="muted">regulatory anchors.</span></h2>
     <div class="reg-anchor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px">
-      <div class="platform-card" style="border-left:4px solid var(--purple)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px">
-          <div class="plat-name" style="font-size:20px">EU AI Act</div>
-          <span style="font-family:var(--mono);font-size:11px;font-weight:600;padding:4px 12px;border-radius:8px;background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border);white-space:nowrap">Reg. 2024/1689</span>
-        </div>
+      <div class="platform-card">
+        <div class="plat-name" style="margin-bottom:14px">EU AI Act</div>
         <p style="font-size:15px;color:var(--text);margin-bottom:10px;line-height:1.65">Risk classification, transparency (Art. 12), human oversight (Art. 14).</p>
         <p style="font-size:14px;color:var(--text3);line-height:1.6">Primary frame for autonomous agents in high-risk domains.</p>
       </div>
-      <div class="platform-card" style="border-left:4px solid var(--teal)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px">
-          <div class="plat-name" style="font-size:20px">MiFID II</div>
-          <span style="font-family:var(--mono);font-size:11px;font-weight:600;padding:4px 12px;border-radius:8px;background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border);white-space:nowrap">Art. 17 · RTS 6</span>
-        </div>
+      <div class="platform-card">
+        <div class="plat-name" style="margin-bottom:14px">MiFID II</div>
         <p style="font-size:15px;color:var(--text);margin-bottom:10px;line-height:1.65">Algorithmic trading safeguards, kill-switch, pre-trade controls.</p>
         <p style="font-size:14px;color:var(--text3);line-height:1.6">Applies when agents route orders for regulated instruments.</p>
       </div>
