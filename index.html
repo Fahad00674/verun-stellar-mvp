@@ -131,10 +131,8 @@ a{color:var(--teal);text-decoration:none}
 .market-divider{height:1px;background:var(--border);margin-bottom:48px;width:90%}
 .market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
 .market-stat{display:flex;flex-direction:column}
-.ms-num{font-size:clamp(34px,3.5vw,44px);font-weight:700;color:#8898aa;line-height:1.05;letter-spacing:-0.025em;margin-bottom:12px}
-.market-stat:first-child .ms-num{color:var(--text)}
-.ms-plus{color:inherit;font-weight:700;margin-left:1px}
-.market-stat:first-child .ms-plus{color:var(--teal)}
+.ms-num{font-size:clamp(34px,3.5vw,44px);font-weight:700;color:var(--text);line-height:1.05;letter-spacing:-0.025em;margin-bottom:12px}
+.ms-plus{color:var(--teal);font-weight:700;margin-left:1px}
 .ms-desc{font-size:14px;color:var(--text2);line-height:1.4;letter-spacing:-0.005em}
 .market-sources{font-family:var(--mono);font-size:11px;color:#8898aa;margin-top:24px;line-height:1.55;letter-spacing:0.02em}
 .modes-section{padding-top:100px}
@@ -178,7 +176,9 @@ a{color:var(--teal);text-decoration:none}
 .section-label{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
 .section-h2{font-size:clamp(36px,4.5vw,54px);font-weight:800;color:var(--text);line-height:1.05;margin-bottom:48px;letter-spacing:-0.03em}
 .section-h2 .muted{color:#8898aa;font-weight:600}
-.section-sub{font-size:16px;color:var(--text2);line-height:1.55;max-width:640px}
+.section-sub{font-size:16px;color:var(--text2);line-height:1.55;max-width:640px;margin-bottom:48px}
+/* When section-sub follows h2, reduce h2 margin to avoid double-gap */
+.section-h2 + .section-sub{margin-top:-32px}
 
 /* DEMO */
 .demo-section{background:var(--bg)}
