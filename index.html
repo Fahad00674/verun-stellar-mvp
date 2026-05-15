@@ -498,7 +498,9 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 .er-search{width:100%;padding:5px 9px 5px 24px;border:1px solid var(--border);border-radius:5px;font-size:9px;color:var(--text3);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='20' y1='20' x2='16.5' y2='16.5'/%3E%3C/svg%3E") no-repeat 8px center;margin-bottom:12px}
 .er-title{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.015em;margin-bottom:12px}
 
-.er-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.er-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px}
+.er-asset-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.er-asset-row .er-asset{margin-bottom:0}
 .er-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px}
 .er-card-h{font-size:10px;font-weight:700;color:var(--text);margin-bottom:10px}
 .er-asset{padding:8px;background:#fafbff;border-radius:5px;margin-bottom:7px}
@@ -607,6 +609,8 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .er-sidebar{display:none}
   .er-main{padding:14px 14px 16px}
   .er-title{font-size:14px;margin-bottom:10px}
+  .er-asset-row{grid-template-columns:1fr;gap:7px}
+  .er-asset-row .er-asset{margin-bottom:0}
   .er-asset-amount{font-size:12px}
   .er-asset-name{font-size:9px}
   .er-chart{height:60px}
@@ -658,13 +662,13 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
             <div class="er-logo">ERSTER</div>
             <div class="er-nav-item"><span class="er-bullet"></span>Smart Contracts</div>
             <div class="er-nav-item"><span class="er-bullet"></span>Assets</div>
-            <div class="er-nav-item active"><span class="er-bullet"></span>Investors</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Investors</div>
             <div class="er-nav-item"><span class="er-bullet"></span>Transactions</div>
             <div class="er-nav-item"><span class="er-bullet"></span>Permission</div>
             <div class="er-nav-item"><span class="er-bullet"></span>Analytics</div>
             <div class="er-nav-item"><span class="er-bullet"></span>Affiliate</div>
             <div class="er-nav-label">VERUN LAYER</div>
-            <div class="er-nav-item"><span class="er-bullet green"></span>VERUN AI Referrals</div>
+            <div class="er-nav-item active"><span class="er-bullet"></span>VERUN AI Referrals</div>
             <div class="er-nav-item"><span class="er-bullet"></span>VERUN Agent Score</div>
             <div class="er-nav-item amber"><span class="er-bullet"></span>VERUN Validator</div>
           </div>
@@ -674,18 +678,20 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
             <div class="er-grid">
               <div class="er-card">
                 <div class="er-card-h">Current Sales Status of Assets</div>
-                <div class="er-asset">
-                  <div class="er-asset-icon"></div>
-                  <div class="er-asset-name">TKFG Bond FLEX</div>
-                  <div class="er-asset-amount">€2M of €8M raised</div>
-                  <div class="er-bar"><div class="er-bar-fill green"></div></div>
-                </div>
-                <div class="er-asset">
-                  <div class="er-asset-icon purple"></div>
-                  <span class="er-tag-mini purple">VERUN AI REFERRALS</span>
-                  <div class="er-asset-name">TKFG Bond CLASSIC</div>
-                  <div class="er-asset-amount">€4M of €10M <span class="ai">AI referred</span></div>
-                  <div class="er-bar"><div class="er-bar-fill purple"></div></div>
+                <div class="er-asset-row">
+                  <div class="er-asset">
+                    <div class="er-asset-icon"></div>
+                    <div class="er-asset-name">TKFG Bond FLEX</div>
+                    <div class="er-asset-amount">€2M of €8M raised</div>
+                    <div class="er-bar"><div class="er-bar-fill green"></div></div>
+                  </div>
+                  <div class="er-asset">
+                    <div class="er-asset-icon purple"></div>
+                    <span class="er-tag-mini purple">VERUN AI REFERRALS</span>
+                    <div class="er-asset-name">TKFG Bond CLASSIC</div>
+                    <div class="er-asset-amount">€4M of €10M <span class="ai">AI referred</span></div>
+                    <div class="er-bar"><div class="er-bar-fill purple"></div></div>
+                  </div>
                 </div>
               </div>
               <div class="er-card er-chart-card">
