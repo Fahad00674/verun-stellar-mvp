@@ -418,6 +418,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .phone{width:200px}
   .section{padding:48px 0}
   .modes-section{padding-top:40px !important}
+  .market-section{padding-top:10px !important}
   .section-title{font-size:26px}
   .section-sub{font-size:14px}
   .demo-stage{padding:18px 14px}
@@ -541,44 +542,82 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 .er-pill-status.waiting{background:#f1f5f9;color:var(--text3)}
 .er-pill-status.rejected{background:#fee2e2;color:#dc2626}
 
-/* Mobile responsive */
-@media(max-width:760px){
+/* TABLET — stack copy + browser, dashboard fills container width (same edges as rest of website) */
+@media(max-width:1024px){
+  .erster-section{padding:80px 0 60px}
+  .erster-inner{grid-template-columns:1fr;gap:36px}
+  .erster-copy{padding-right:0;max-width:680px}
+  .erster-browser{max-width:none;margin:0 auto;width:100%}
+  /* slight internal tighten */
+  .er-dash{grid-template-columns:160px 1fr;min-height:400px}
+  .er-main{padding:14px 16px}
+}
+
+@media(max-width:780px){
   .erster-section{padding:60px 0 40px}
-  .erster-inner{grid-template-columns:1fr;gap:32px}
-  .erster-copy{padding-right:0}
   .erster-section .section-h2{font-size:62px;line-height:1.02;letter-spacing:-0.035em}
   .erster-section .section-h2 .ln{white-space:normal}
-  .erster-browser{margin-right:-20px;margin-left:-20px;border-radius:10px}
-  .er-dash{grid-template-columns:120px 1fr;min-height:340px}
-  .er-sidebar{padding:11px 7px}
-  .er-logo{font-size:10px;letter-spacing:0.1em}
-  .er-nav-item{font-size:8.5px;padding:4px 6px;gap:5px}
-  .er-nav-item .er-bullet{width:4px;height:4px}
-  .er-nav-label{font-size:6.5px;margin:9px 6px 3px;letter-spacing:0.12em}
-  .er-main{padding:11px 12px}
-  .er-search{font-size:8.5px;padding:5px 8px 5px 22px;margin-bottom:10px}
-  .er-title{font-size:13px;margin-bottom:10px}
-  .er-grid{grid-template-columns:1fr;gap:8px}
-  .er-card{padding:10px}
+  .er-dash{grid-template-columns:140px 1fr;min-height:360px}
+  .er-sidebar{padding:13px 9px}
+  .er-logo{font-size:11px;margin-bottom:11px;padding:0 6px}
+  .er-nav-item{font-size:9.5px;padding:4px 6px;gap:5px}
+  .er-nav-item .er-bullet{width:5px;height:5px}
+  .er-nav-label{font-size:7px;margin:11px 6px 3px}
+  .er-main{padding:13px 15px}
+  .er-search{font-size:9px;padding:5px 8px 5px 22px;margin-bottom:11px}
+  .er-title{font-size:14px;margin-bottom:11px}
+  .er-card{padding:11px}
   .er-asset-amount{font-size:11px}
+  .er-asset-name{font-size:8.5px}
   .er-chart{height:60px}
-  .er-table-card{padding:8px}
-  .er-table th{font-size:6px}
-  .er-table td{font-size:7.5px}
-  .er-pill-status{font-size:7px;padding:2px 6px}
+  .er-table-card{padding:9px}
+  .er-table th{font-size:7px}
+  .er-table td{font-size:8px}
+  .er-pill-status{font-size:7.5px;padding:2px 7px}
   .er-table th:nth-child(3),.er-table td:nth-child(3),
   .er-table th:nth-child(4),.er-table td:nth-child(4),
   .er-table th:nth-child(6),.er-table td:nth-child(6){display:none}
 }
+
+@media(max-width:640px){
+  .er-dash{grid-template-columns:120px 1fr;min-height:320px}
+  .er-sidebar{padding:11px 8px}
+  .er-logo{font-size:10px}
+  .er-nav-item{font-size:8.5px;padding:3px 6px;gap:4px}
+  .er-nav-item .er-bullet{width:4.5px;height:4.5px}
+  .er-nav-label{font-size:6.5px;margin:10px 6px 3px}
+  .er-main{padding:11px 13px}
+  .er-search{font-size:8px;padding:4px 7px 4px 20px}
+  .er-title{font-size:12px}
+  .er-grid{grid-template-columns:1fr;gap:7px}
+  .er-card{padding:10px}
+  .er-asset-amount{font-size:10.5px}
+  .er-asset-name{font-size:8px}
+  .er-chart{height:52px}
+  .er-table-card{padding:8px}
+  .er-table th{font-size:6.5px}
+  .er-table td{font-size:7.5px}
+  .er-pill-status{font-size:7px;padding:2px 6px}
+}
+
 @media(max-width:480px){
   .erster-section{padding:50px 0 32px}
   .erster-section .section-h2{font-size:60px;line-height:1.02;letter-spacing:-0.035em}
   .er-dash{grid-template-columns:1fr;min-height:0}
   .er-sidebar{display:none}
-  .er-main{padding:12px 12px 14px}
+  .er-main{padding:14px 14px 16px}
+  .er-title{font-size:14px;margin-bottom:10px}
+  .er-asset-amount{font-size:12px}
+  .er-asset-name{font-size:9px}
+  .er-chart{height:60px}
+  .er-table th{font-size:7px}
+  .er-table td{font-size:8.5px}
+  .er-pill-status{font-size:8px;padding:2px 7px}
 }
+
 @media(max-width:380px){
   .erster-section .section-h2{font-size:54px}
+  .er-main{padding:12px 12px 14px}
 }
 </style>
 </head>
@@ -690,7 +729,6 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
                   <tr><td>Waldemar Mannering</td><td>mann@stack3.io</td><td>0XVDD…Z46</td><td>10/05/26</td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
                   <tr><td>Louetta Esses</td><td>admin@sisyphus.com</td><td>7XJFQ…V12</td><td>22/06/26</td><td><span class="er-pill-status rejected">Rejected</span></td></tr>
                   <tr><td>Tessa Meyer</td><td>tessmeyer@gmail.com</td><td>0X1FC…532</td><td>04/08/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
-                  <tr><td>Ardis Balderson</td><td>ardis.tech@astai.io</td><td>0d1Gp…c65</td><td>17/09/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
                 </tbody>
               </table>
             </div>
