@@ -69,19 +69,20 @@ a{color:var(--teal);text-decoration:none}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.5)}}
 
 /* HERO */
-.hero{padding:80px 0 60px;position:relative;overflow:visible;background:linear-gradient(#22c55e 0%,#16a34a 100%)}
-.hero-inner{position:relative;display:grid;grid-template-columns:1.05fr 0.95fr;align-items:start;gap:0;padding-bottom:0}
-.hero-copy{text-align:left;padding-bottom:0}
-.hero h1{font-size:clamp(44px,5.5vw,72px);font-weight:800;line-height:1.02;color:#fff;margin-bottom:24px;letter-spacing:-0.035em}
-.hero h1 .hl{color:#fff}
-.hero-sub{font-size:20px;color:rgba(255,255,255,0.92);max-width:520px;margin:0 0 32px;line-height:1.55;font-weight:400;letter-spacing:-0.004em}
-.hero-sub strong{color:#fff;font-weight:700}
+.hero{padding:80px 0 30px;position:relative;overflow:visible;background:#ffffff}
+.hero-inner{position:relative;display:grid;grid-template-columns:0.95fr 1.05fr;grid-template-areas:"phone copy";align-items:start;gap:0;padding-bottom:0}
+.hero-copy{text-align:left;padding-bottom:0;align-self:center;grid-area:copy}
+.hero h1{font-size:clamp(40px,4.5vw,60px);font-weight:800;line-height:1.04;color:var(--text);margin-bottom:24px;letter-spacing:-0.03em}
+.hero h1 .hl{color:var(--text)}
+.hero h1 .muted{color:#8898aa;font-weight:600}
+.hero-sub{font-size:20px;color:var(--text2);max-width:520px;margin:8px 0 32px;line-height:1.55;font-weight:400;letter-spacing:-0.004em}
+.hero-sub strong{color:inherit;font-weight:700}
 .hero-btns{display:flex;justify-content:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:0}
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;border:none;border-radius:10px;padding:14px 28px;transition:all 0.2s;letter-spacing:-0.005em}
-.btn-teal{background:#fff;color:var(--teal);box-shadow:0 4px 14px 0 rgba(0,0,0,0.10)}
-.btn-teal:hover{background:#f3fdf9;box-shadow:0 6px 24px rgba(0,0,0,0.15);transform:translateY(-1px)}
-.btn-outline{background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.5)}
-.btn-outline:hover{background:rgba(255,255,255,0.28);border-color:rgba(255,255,255,0.7)}
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 4px 14px 0 rgba(22,163,74,0.25)}
+.btn-teal:hover{background:#15803d;box-shadow:0 6px 24px rgba(22,163,74,0.35);transform:translateY(-1px)}
+.btn-outline{background:#fff;color:var(--text);border:1px solid var(--border-strong)}
+.btn-outline:hover{background:#f8f9fe;border-color:var(--text2)}
 .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid var(--border)}
 .pill-teal{background:var(--teal-dim);color:var(--teal);border-color:var(--teal-border)}
 .pill-purple{background:var(--purple-dim);color:var(--purple);border-color:var(--purple-border)}
@@ -89,16 +90,19 @@ a{color:var(--teal);text-decoration:none}
 .pill-amber{background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25)}
 
 /* HERO PHONE — iPhone 15 Pro style mockup showing live demo content (overflows into white section) */
-.hero-phone-wrap{display:flex;justify-content:center;align-items:flex-start;padding:0;position:relative;margin-bottom:-180px;z-index:5}
+.hero-phone-wrap{display:flex;justify-content:center;align-items:flex-start;padding:0;position:relative;margin-bottom:-20px;z-index:5;grid-area:phone}
 .hero-phone{
-  width:340px;height:716px;
+  width:340px;height:680px;
   background:#0a2540;
   border-radius:54px;padding:8px;
   /* Reference exact shadow: subtle ring + dark shadow + green ambient glow */
+  /* Apple-style layered shadow on white bg — neutral dark, no green tint */
   box-shadow:
-    0 0 0 2px rgba(255,255,255,0.06),
-    0 30px 60px 0 rgba(0,0,0,0.25),
-    0 60px 120px 0 rgba(22,163,74,0.3);
+    0 0 0 1.5px rgba(74,81,96,0.35),
+    0 2px 6px rgba(15,23,42,0.05),
+    0 12px 24px rgba(15,23,42,0.07),
+    0 28px 56px rgba(15,23,42,0.10),
+    0 56px 100px rgba(15,23,42,0.10);
   position:relative;
 }
 .hero-phone::before{content:'';position:absolute;right:-2px;top:160px;width:4px;height:60px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
@@ -126,7 +130,7 @@ a{color:var(--teal);text-decoration:none}
 .hp-tick{width:14px;height:14px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0;margin-top:1px}
 
 /* Ensure the next section after the hero has breathing room for the phone overflow */
-.market-section{background:#fff;padding-top:60px;padding-bottom:60px}
+.market-section{background:#fff;padding-top:0;padding-bottom:60px}
 .market-label{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8898aa;padding:5px 12px;border-radius:20px;border:1px solid #e5ebf7;background:#f8f9fe;margin-bottom:32px}
 .market-divider{height:1px;background:var(--border);margin-bottom:48px;width:90%}
 .market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
@@ -139,13 +143,13 @@ a{color:var(--teal);text-decoration:none}
 
 /* === MOBILE HERO OVERRIDES (placed AFTER defaults so cascade wins without !important) === */
 @media(max-width:760px){
-  .hero-inner{grid-template-columns:1fr;gap:0}
+  .hero-inner{grid-template-columns:1fr;gap:0;grid-template-areas:"copy" "phone"}
   .hero-copy{padding:0 0 36px;text-align:left}
   .hero h1{font-size:62px;line-height:1.02;text-align:left;letter-spacing:-0.035em}
   .hero-sub{font-size:19px;text-align:left;margin:0 0 36px;line-height:1.5}
   .hero-btns{justify-content:flex-start;margin-bottom:0}
   .hero-phone-wrap{padding:0 0 50px;margin-bottom:0;align-items:center;z-index:1}
-  .hero-phone{width:min(340px,calc(100vw - 60px));height:auto;aspect-ratio:340/716;padding:8px}
+  .hero-phone{width:min(340px,calc(100vw - 60px));height:auto;aspect-ratio:340/680;padding:8px}
   .hero-phone::before{top:140px;height:50px}
   .hero-phone::after{top:100px;height:30px;box-shadow:0 46px 0 #4a5160,0 90px 0 #4a5160}
   .hero-phone-island{width:90px;height:24px;top:14px}
@@ -454,6 +458,128 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 @media(min-width:601px) and (max-width:900px){
   .platform-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* ============== ERSTER OPENER SECTION (above hero) ============== */
+.erster-section{background:linear-gradient(#22c55e 0%,#16a34a 100%);padding:100px 0;overflow:hidden}
+.erster-section .section-h2{color:#fff}
+.erster-section .section-h2 .muted{color:rgba(255,255,255,0.55);font-weight:600}
+.erster-inner{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center}
+.erster-copy{padding-right:8px}
+.erster-section .section-label{margin-bottom:18px}
+.erster-section .section-h2{margin-bottom:24px;font-size:clamp(40px,4.5vw,60px);line-height:1.04;letter-spacing:-0.03em}
+.erster-section .section-h2 .ln{display:block;white-space:nowrap}
+.erster-sub{font-size:17px;color:var(--text2);line-height:1.55;max-width:520px}
+
+/* Browser-framed dashboard mockup */
+.erster-browser{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.erster-bar{background:#f1f5f9;border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:14px}
+.erster-dots{display:flex;gap:6px}
+.erster-dots span{width:10px;height:10px;border-radius:50%}
+.erster-dots span:nth-child(1){background:#ff5f57}
+.erster-dots span:nth-child(2){background:#febc2e}
+.erster-dots span:nth-child(3){background:#28c840}
+.erster-url{flex:1;background:#fff;border:1px solid var(--border);border-radius:8px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--text3);max-width:260px;margin:0 auto;text-align:center}
+
+/* Dashboard layout — compact for laptop viewport */
+.er-dash{display:grid;grid-template-columns:160px 1fr;background:#f8f9fe;min-height:400px}
+.er-sidebar{background:#fff;border-right:1px solid var(--border);padding:14px 11px;display:flex;flex-direction:column;gap:3px}
+.er-logo{font-weight:800;font-size:12px;letter-spacing:0.1em;color:var(--text);margin-bottom:12px;padding:0 7px}
+.er-nav-label{font-family:var(--mono);font-size:7.5px;font-weight:700;letter-spacing:0.14em;color:var(--text3);text-transform:uppercase;margin:12px 7px 4px}
+.er-nav-item{display:flex;align-items:center;gap:6px;padding:5px 7px;border-radius:5px;font-size:9.5px;color:var(--text2);font-weight:500;cursor:default}
+.er-nav-item.active{background:#dcfce7;color:var(--teal);font-weight:600}
+.er-nav-item .er-bullet{width:5px;height:5px;border-radius:50%;background:#cbd5e1;flex-shrink:0}
+.er-nav-item.active .er-bullet,.er-nav-item .er-bullet.green{background:var(--teal)}
+.er-nav-item.purple .er-bullet{background:#7B61FF}
+.er-nav-item.amber .er-bullet{background:#d97706}
+
+/* Main area */
+.er-main{padding:14px 16px;overflow:hidden}
+.er-search{width:100%;padding:5px 9px 5px 24px;border:1px solid var(--border);border-radius:5px;font-size:9px;color:var(--text3);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='20' y1='20' x2='16.5' y2='16.5'/%3E%3C/svg%3E") no-repeat 8px center;margin-bottom:12px}
+.er-title{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.015em;margin-bottom:12px}
+
+.er-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.er-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px}
+.er-card-h{font-size:10px;font-weight:700;color:var(--text);margin-bottom:10px}
+.er-asset{padding:8px;background:#fafbff;border-radius:5px;margin-bottom:7px}
+.er-asset:last-child{margin-bottom:0}
+.er-asset-icon{width:15px;height:15px;border-radius:3px;background:#dcfce7;display:inline-block;margin-bottom:5px}
+.er-asset-icon.purple{background:#efe9ff}
+.er-tag-mini{font-family:var(--mono);font-size:6px;font-weight:700;letter-spacing:0.1em;padding:2px 5px;border-radius:3px;display:inline-block;margin-bottom:4px;text-transform:uppercase}
+.er-tag-mini.purple{background:#efe9ff;color:#7B61FF}
+.er-asset-name{font-size:9px;color:var(--text2);margin-bottom:4px}
+.er-asset-amount{font-size:12px;font-weight:800;color:var(--text);margin-bottom:5px;letter-spacing:-0.01em}
+.er-asset-amount .ai{color:#7B61FF}
+.er-bar{height:2.5px;border-radius:2px;background:#e2e8f0;overflow:hidden}
+.er-bar-fill{height:100%;border-radius:2px}
+.er-bar-fill.green{background:var(--teal);width:25%}
+.er-bar-fill.purple{background:#7B61FF;width:40%}
+
+.er-chart-card{position:relative}
+.er-tag-mini.verun{background:#efe9ff;color:#7B61FF;position:absolute;top:10px;left:10px}
+.er-chart-title{font-size:9px;font-weight:700;color:var(--text);margin-top:14px;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.er-chart-pct{font-size:7.5px;color:var(--teal);font-weight:700}
+.er-chart{height:70px;position:relative;margin-top:6px}
+.er-chart svg{width:100%;height:100%}
+.er-legend{display:flex;gap:8px;font-size:6.5px;color:var(--text3);margin-top:4px;justify-content:center}
+.er-legend span{display:flex;align-items:center;gap:2px}
+.er-legend span::before{content:'';width:5px;height:5px;border-radius:50%;background:#cbd5e1}
+.er-legend span.line::before{background:#7B61FF}
+
+/* Investors table */
+.er-table-card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:10px}
+.er-table-card h3{font-size:9px;font-weight:700;color:var(--text);margin-bottom:1px}
+.er-table-card p{font-size:7.5px;color:var(--text3);margin-bottom:8px}
+.er-table{width:100%;font-size:7.5px;border-collapse:collapse}
+.er-table th{text-align:left;font-weight:700;color:var(--text3);font-size:6.5px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 0;border-bottom:1px solid var(--border)}
+.er-table td{padding:4.5px 0;border-bottom:1px solid #f1f5f9;color:var(--text2)}
+.er-table tr:last-child td{border-bottom:0}
+.er-table td:first-child{font-weight:600;color:var(--text)}
+.er-pill-status{font-size:8px;font-weight:700;padding:2px 7px;border-radius:8px;display:inline-block}
+.er-pill-status.yes{background:#dcfce7;color:var(--teal)}
+.er-pill-status.no{background:#fee2e2;color:#dc2626}
+.er-pill-status.approved{background:#dcfce7;color:var(--teal)}
+.er-pill-status.waiting{background:#f1f5f9;color:var(--text3)}
+.er-pill-status.rejected{background:#fee2e2;color:#dc2626}
+
+/* Mobile responsive */
+@media(max-width:760px){
+  .erster-section{padding:60px 0 40px}
+  .erster-inner{grid-template-columns:1fr;gap:32px}
+  .erster-copy{padding-right:0}
+  .erster-section .section-h2{font-size:62px;line-height:1.02;letter-spacing:-0.035em}
+  .erster-section .section-h2 .ln{white-space:normal}
+  .erster-browser{margin-right:-20px;margin-left:-20px;border-radius:10px}
+  .er-dash{grid-template-columns:120px 1fr;min-height:340px}
+  .er-sidebar{padding:11px 7px}
+  .er-logo{font-size:10px;letter-spacing:0.1em}
+  .er-nav-item{font-size:8.5px;padding:4px 6px;gap:5px}
+  .er-nav-item .er-bullet{width:4px;height:4px}
+  .er-nav-label{font-size:6.5px;margin:9px 6px 3px;letter-spacing:0.12em}
+  .er-main{padding:11px 12px}
+  .er-search{font-size:8.5px;padding:5px 8px 5px 22px;margin-bottom:10px}
+  .er-title{font-size:13px;margin-bottom:10px}
+  .er-grid{grid-template-columns:1fr;gap:8px}
+  .er-card{padding:10px}
+  .er-asset-amount{font-size:11px}
+  .er-chart{height:60px}
+  .er-table-card{padding:8px}
+  .er-table th{font-size:6px}
+  .er-table td{font-size:7.5px}
+  .er-pill-status{font-size:7px;padding:2px 6px}
+  .er-table th:nth-child(3),.er-table td:nth-child(3),
+  .er-table th:nth-child(4),.er-table td:nth-child(4),
+  .er-table th:nth-child(6),.er-table td:nth-child(6){display:none}
+}
+@media(max-width:480px){
+  .erster-section{padding:50px 0 32px}
+  .erster-section .section-h2{font-size:60px;line-height:1.02;letter-spacing:-0.035em}
+  .er-dash{grid-template-columns:1fr;min-height:0}
+  .er-sidebar{display:none}
+  .er-main{padding:12px 12px 14px}
+}
+@media(max-width:380px){
+  .erster-section .section-h2{font-size:54px}
+}
 </style>
 </head>
 <body>
@@ -461,7 +587,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 <!-- NAV -->
 <nav class="nav">
   <div class="container nav-inner">
-    <div class="nav-logo">Verun <span class="tag">NETWORK</span></div>
+    <div class="nav-logo" style="letter-spacing:0.12em">ERSTER</div>
     <div class="nav-links">
       <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
       <a href="#platforms">Platforms</a>
@@ -476,13 +602,112 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   </div>
 </nav>
 
+<!-- ERSTER OPENER (above hero) -->
+<section class="erster-section" id="erster">
+  <div class="container">
+    <div class="erster-inner">
+      <div class="erster-copy">
+        <h2 class="section-h2"><span class="ln">Assets.</span><span class="ln">Agentic Investors.</span><span class="ln muted">One Workflow.</span></h2>
+      </div>
+      <div class="erster-browser">
+        <div class="erster-bar">
+          <div class="erster-dots"><span></span><span></span><span></span></div>
+          <div class="erster-url">erster.fund</div>
+        </div>
+        <div class="er-dash">
+          <div class="er-sidebar">
+            <div class="er-logo">ERSTER</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Smart Contracts</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Assets</div>
+            <div class="er-nav-item active"><span class="er-bullet"></span>Investors</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Transactions</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Permission</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Analytics</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Affiliate</div>
+            <div class="er-nav-label">VERUN LAYER</div>
+            <div class="er-nav-item"><span class="er-bullet green"></span>VERUN AI Referrals</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>VERUN Agent Score</div>
+            <div class="er-nav-item amber"><span class="er-bullet"></span>VERUN Validator</div>
+          </div>
+          <div class="er-main">
+            <input class="er-search" placeholder="Search">
+            <div class="er-title">Platform overview</div>
+            <div class="er-grid">
+              <div class="er-card">
+                <div class="er-card-h">Current Sales Status of Assets</div>
+                <div class="er-asset">
+                  <div class="er-asset-icon"></div>
+                  <div class="er-asset-name">TKFG Bond FLEX</div>
+                  <div class="er-asset-amount">€2M of €8M raised</div>
+                  <div class="er-bar"><div class="er-bar-fill green"></div></div>
+                </div>
+                <div class="er-asset">
+                  <div class="er-asset-icon purple"></div>
+                  <span class="er-tag-mini purple">VERUN AI REFERRALS</span>
+                  <div class="er-asset-name">TKFG Bond CLASSIC</div>
+                  <div class="er-asset-amount">€4M of €10M <span class="ai">AI referred</span></div>
+                  <div class="er-bar"><div class="er-bar-fill purple"></div></div>
+                </div>
+              </div>
+              <div class="er-card er-chart-card">
+                <span class="er-tag-mini verun">VERUN AI</span>
+                <div class="er-chart-title">Weekly Agentic Referrals <span class="er-chart-pct">+15.2%</span></div>
+                <div class="er-chart">
+                  <svg viewBox="0 0 200 80" preserveAspectRatio="none">
+                    <rect x="5" y="30" width="14" height="50" rx="2" fill="#e2e8f0"/>
+                    <rect x="25" y="14" width="14" height="66" rx="2" fill="#e2e8f0"/>
+                    <rect x="45" y="38" width="14" height="42" rx="2" fill="#e2e8f0"/>
+                    <rect x="65" y="32" width="14" height="48" rx="2" fill="#e2e8f0"/>
+                    <rect x="85" y="42" width="14" height="38" rx="2" fill="#e2e8f0"/>
+                    <rect x="105" y="6" width="14" height="74" rx="2" fill="#e2e8f0"/>
+                    <rect x="125" y="22" width="14" height="58" rx="2" fill="#e2e8f0"/>
+                    <rect x="145" y="18" width="14" height="62" rx="2" fill="#e2e8f0"/>
+                    <rect x="165" y="26" width="14" height="54" rx="2" fill="#e2e8f0"/>
+                    <polyline points="12,42 32,38 52,46 72,40 92,44 112,28 132,34 152,22 172,30" fill="none" stroke="#7B61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="42" r="2" fill="#7B61FF"/>
+                    <circle cx="32" cy="38" r="2" fill="#7B61FF"/>
+                    <circle cx="52" cy="46" r="2" fill="#7B61FF"/>
+                    <circle cx="72" cy="40" r="2" fill="#7B61FF"/>
+                    <circle cx="92" cy="44" r="2" fill="#7B61FF"/>
+                    <circle cx="112" cy="28" r="2" fill="#7B61FF"/>
+                    <circle cx="132" cy="34" r="2" fill="#7B61FF"/>
+                    <circle cx="152" cy="22" r="2" fill="#7B61FF"/>
+                    <circle cx="172" cy="30" r="2" fill="#7B61FF"/>
+                  </svg>
+                </div>
+                <div class="er-legend"><span>Referrals per Day</span><span class="line">Avg · AI-driven</span></div>
+              </div>
+            </div>
+            <div class="er-table-card">
+              <h3>Investors List</h3>
+              <p>Your detailed overview about your investors.</p>
+              <table class="er-table">
+                <thead>
+                  <tr><th>Name</th><th>Email</th><th>Wallet</th><th>Reg.</th><th>KYC</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Tommy Sicilia</td><td>tommy@gmail.com</td><td>0X3FC…478</td><td>02/04/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
+                  <tr><td>Waldemar Mannering</td><td>mann@stack3.io</td><td>0XVDD…Z46</td><td>10/05/26</td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
+                  <tr><td>Louetta Esses</td><td>admin@sisyphus.com</td><td>7XJFQ…V12</td><td>22/06/26</td><td><span class="er-pill-status rejected">Rejected</span></td></tr>
+                  <tr><td>Tessa Meyer</td><td>tessmeyer@gmail.com</td><td>0X1FC…532</td><td>04/08/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
+                  <tr><td>Ardis Balderson</td><td>ardis.tech@astai.io</td><td>0d1Gp…c65</td><td>17/09/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="container">
     <div class="hero-inner">
       <div class="hero-copy">
-        <h1>The Trust ID<br>for Agentic Finance.</h1>
-        <p class="hero-sub">Make your AI agent <strong>regulatory-ready</strong>. MiFID II + EU AI Act compliant.</p>
+        <h1>Trusted agents.<br><span class="muted">Scored referrals.</span></h1>
+        <p class="hero-sub">Make your AI agent <strong>regulatory-ready</strong>.<br>MiFID II + EU AI Act compliant.<br>Verun is the agentic trust layer by Erster.</p>
         <div class="hero-btns">
           <button class="btn btn-teal" onclick="scrollToDemo()">Run Demo →</button>
           <a href="/docs.html" target="_blank" class="btn btn-outline">View Docs</a>
@@ -540,7 +765,6 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 <!-- ADDRESSABLE MARKET · EU -->
 <section class="section market-section" id="market">
   <div class="container">
-    <div class="market-label">ADDRESSABLE MARKET · EU</div>
     <div class="market-divider"></div>
     <div class="market-grid">
       <div class="market-stat">
@@ -567,7 +791,6 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 <!-- 3 MODES -->
 <section class="section modes-section" id="how">
   <div class="container">
-    <div class="section-label">How it works</div>
     <h2 class="section-h2">Three modes. <span class="muted">One protocol.</span></h2>
     <div class="modes-grid">
       <div class="mode-card">
@@ -596,7 +819,6 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 <section class="section demo-section" id="demo">
   <div class="container">
     <div class="demo-head" style="text-align:center">
-      <div class="section-label">Interactive Demo</div>
       <h2 class="section-h2" style="margin-bottom:8px">Test how your agent <span class="muted">is scoring.</span></h2>
     </div>
 
@@ -623,7 +845,6 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 <!-- AGENT QUICKSTART -->
 <section class="section" id="quickstart" style="background:var(--bg2)">
   <div class="container">
-    <div class="section-label">Agent Quickstart</div>
     <h2 class="section-h2">Test the network <span class="muted">in 3 seconds.</span></h2>
     <p class="section-sub" style="margin-bottom:40px">Give it to your agent — or paste it in your terminal yourself.</p>
     <div style="background:linear-gradient(135deg,rgba(22,163,74,0.02) 0%,rgba(22,163,74,0.005) 30%,#ffffff 50%);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;max-width:860px;box-shadow:var(--shadow-md)">
@@ -660,7 +881,6 @@ print('  → Click the Stellar Expert link to see the live transaction.')
 <!-- PLATFORM REGISTRY -->
 <section class="section platform-section" id="platforms">
   <div class="container">
-    <div class="section-label">Validator Network</div>
     <h2 class="section-h2">Regulated institutions <span class="muted">validate your agent.</span></h2>
     <p class="section-sub">Two founding validators + one open slot for institutional partners.</p>
     <div class="platform-grid">
@@ -687,7 +907,6 @@ print('  → Click the Stellar Expert link to see the live transaction.')
 <!-- REGULATORY ANCHORS -->
 <section class="section" style="background:var(--bg2)">
   <div class="container">
-    <div class="section-label">EU Regulatory Anchors</div>
     <h2 class="section-h2">Primary <span class="muted">regulatory anchors.</span></h2>
     <div class="reg-anchor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px">
       <div class="platform-card">
@@ -713,7 +932,7 @@ print('  → Click the Stellar Expert link to see the live transaction.')
   <div class="container">
     <div class="footer-inner">
       <div>
-        <div class="footer-brand">Verun <span class="tag">NETWORK</span></div>
+        <div class="footer-brand" style="letter-spacing:0.12em">ERSTER</div>
         <div style="font-size:11px;color:var(--text3);margin-top:4px;font-family:var(--mono)">© 2026 BCP Partners GmbH · All rights reserved</div>
       </div>
       <div class="footer-links">
